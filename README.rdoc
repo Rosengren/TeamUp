@@ -13,10 +13,17 @@ Use Cases
 
 Entities
 ---------
--User: id, name, games, proficiencies in each game, number of endorsements per proficiency, profile picture URL, list of teams, description, permission level
--Team: id, name, game, description, list of players, position of player on team, record, community rating, location, team picture URL
--Proficiency: id, game, name, description, image URL
--Guide: id, game, proficiency, link to content
+-User: username (PID), password, games, proficiencies in each game, endorsements for each proficiency, picture URL, list of teams, description, permission level
+-Team: id (PID), name, game, description, list of players, position of player on team, community rating, location, picture URL
+-Proficiency: id (PID), game, name, description, picture URL, list of relevant posts
+-Game: name (PID), description, picture URL
+-ProficiencyPost: id (PID), title, author, date, proficiency, content
+
+Join Tables
+-----------
+User -> Proficiency: username, proficiency id, CSV of usernames who have endorsed the proficiency
+User -> Team: username, team id, position on team
+User -> Game: username, game name
 
 Description:
 ------------
