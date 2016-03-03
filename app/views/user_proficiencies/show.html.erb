@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Endorsements:</strong>
+  <%= @user_proficiency.endorsements %>
+</p>
+
+<%= link_to 'Edit', edit_user_proficiency_path(@user_proficiency) %> |
+<%= link_to 'Back', user_proficiencies_path %>

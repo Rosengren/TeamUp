@@ -1,0 +1,21 @@
+<%= form_for(@user_proficiency) do |f| %>
+  <% if @user_proficiency.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user_proficiency.errors.count, "error") %> prohibited this user_proficiency from being saved:</h2>
+
+      <ul>
+      <% @user_proficiency.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :endorsements %><br>
+    <%= f.text_area :endorsements %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
