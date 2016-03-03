@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  validates :username, presence: true
+  validates :password, presence: true
+  has_secure_password
 
   # GET /users
   # GET /users.json
