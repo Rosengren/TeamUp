@@ -1,28 +1,35 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Use Cases
+----------
+-User logs into the system with authentication
+-User views their profile page
+-User views a list of users narrowed by proficiencies
+-User views another user's profile page
+-User endorses a proficiency on their profile or another's profile
+-User adds a game to their profile
+-User makes a team
+-User adds other users to the team
 
-Things you may want to cover:
+Entities
+---------
+-User: id, name, games, proficiencies in each game, number of endorsements per proficiency, profile picture URL, list of teams, description, permission level
+-Team: id, name, game, description, list of players, position of player on team, record, community rating, location, team picture URL
+-Proficiency: id, game, name, description, image URL
+-Guide: id, game, proficiency, link to content
 
-* Ruby version
+Description:
+------------
+The name we're using for this project is "TeamUp". The idea is similar to the competency tracker. TeamUp is supposed to a website that will track players' gaming skills. A person should be able to make an account and add a video game to their account. A video game will have a list of static skills. To use Counter Strike (first person shooter) as an example, the skills associated with this game would be things like "AK47 proficiency", "Desert Eagle Proficiency", etc. People should be able to endorse other people's proficiencies. This will be a useful tool for building teams for video games because a user should be able look through a database of players using a variety of search criteria and send team requests to people. Similarly, individual users should be able to look up teams and be able to send team requests to join the teams. Skills will be static and added by the developers (i.e. users cannot create new skills). Each unique skill will have a page containing relevant material, such as guides or news posts. For example "Desert Eagle Proficiency" might have a YouTube video tutorial explaining how to best achieve head shots with the Desert Eagle in the game.
 
-* System dependencies
+==March 1st, 2016 (Lab 1)
+-Created the Project
+-Static Homepage
+-Heroku Integration
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+==March 3rd, 2016 (Lab 2)
+-Laid out the ground plan for the project, and identified all relevant entities and use cases.
+-Discussed integrity issues that users could exploit, including:
+	->Improper use of the endorsement
+	->Reliance on users to provide accurate information for teams (ex: wins/losses)
+	->Poor indication of team skill level by community rating
