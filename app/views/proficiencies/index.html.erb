@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Proficiencies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Game</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Picture url</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @proficiencies.each do |proficiency| %>
+      <tr>
+        <td><%= proficiency.game %></td>
+        <td><%= proficiency.name %></td>
+        <td><%= proficiency.description %></td>
+        <td><%= proficiency.picture_url %></td>
+        <td><%= link_to 'Show', proficiency %></td>
+        <td><%= link_to 'Edit', edit_proficiency_path(proficiency) %></td>
+        <td><%= link_to 'Destroy', proficiency, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Proficiency', new_proficiency_path %>

@@ -35,7 +35,6 @@ body {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
-    color: #FFF;
 }
 
 .text-vertical-center h1 {
@@ -57,4 +56,8 @@ body {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
+}
+
+.oranged {
+    color: orange;
 }

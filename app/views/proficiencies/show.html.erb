@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Game:</strong>
+  <%= @proficiency.game %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @proficiency.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @proficiency.description %>
+</p>
+
+<p>
+  <strong>Picture url:</strong>
+  <%= @proficiency.picture_url %>
+</p>
+
+<%= link_to 'Edit', edit_proficiency_path(@proficiency) %> |
+<%= link_to 'Back', proficiencies_path %>

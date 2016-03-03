@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 
+  name: MyString
+  game: MyString
+  description: MyText
+  community_rating: 
+  location: MyString
+  picture_url: MyText
+
+two:
+  id: 
+  name: MyString
+  game: MyString
+  description: MyText
+  community_rating: 
+  location: MyString
+  picture_url: MyText

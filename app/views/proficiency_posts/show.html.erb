@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @proficiency_post.title %>
+</p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @proficiency_post.username %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @proficiency_post.date %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @proficiency_post.content %>
+</p>
+
+<%= link_to 'Edit', edit_proficiency_post_path(@proficiency_post) %> |
+<%= link_to 'Back', proficiency_posts_path %>

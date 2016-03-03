@@ -1,0 +1,33 @@
+<%= form_for(@proficiency_post) do |f| %>
+  <% if @proficiency_post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@proficiency_post.errors.count, "error") %> prohibited this proficiency_post from being saved:</h2>
+
+      <ul>
+      <% @proficiency_post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :username %><br>
+    <%= f.text_field :username %>
+  </div>
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.datetime_select :date %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_area :content %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
