@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303172406) do
+ActiveRecord::Schema.define(version: 20160303195500) do
 
   create_table "games", force: :cascade do |t|
     t.string   "name"
@@ -21,13 +21,26 @@ ActiveRecord::Schema.define(version: 20160303172406) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "games_users", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "game_id"
+  end
+
+  add_index "games_users", ["game_id"], name: "index_games_users_on_game_id"
+  add_index "games_users", ["user_id"], name: "index_games_users_on_user_id"
+
   create_table "proficiencies", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.text     "picture_url"
+    t.integer  "game_id"
+    t.integer  "users_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "proficiencies", ["game_id"], name: "index_proficiencies_on_game_id"
+  add_index "proficiencies", ["users_id"], name: "index_proficiencies_on_users_id"
 
   create_table "proficiency_posts", force: :cascade do |t|
     t.string   "title"
@@ -43,14 +56,16 @@ ActiveRecord::Schema.define(version: 20160303172406) do
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
-    t.string   "game"
     t.text     "description"
     t.integer  "community_rating"
     t.string   "location"
     t.text     "picture_url"
+    t.integer  "game_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
+
+  add_index "teams", ["game_id"], name: "index_teams_on_game_id"
 
   create_table "user_proficiencies", force: :cascade do |t|
     t.text     "endorsements"
@@ -80,11 +95,8 @@ ActiveRecord::Schema.define(version: 20160303172406) do
     t.text     "description"
     t.text     "picture_url"
     t.integer  "permission_level"
-    t.integer  "team_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
-
-  add_index "users", ["team_id"], name: "index_users_on_team_id"
 
 end

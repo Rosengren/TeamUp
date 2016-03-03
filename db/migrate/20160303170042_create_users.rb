@@ -6,9 +6,13 @@ class CreateUsers < ActiveRecord::Migration
       t.text :description
       t.text :picture_url
       t.integer :permission_level
-      t.belongs_to :team, index: true
 
       t.timestamps null: false
+    end
+
+    create_table :games_users, id: false do |t|
+      t.belongs_to :user, index: true
+      t.belongs_to :game, index: true
     end
   end
 end
