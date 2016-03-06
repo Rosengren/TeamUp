@@ -1,9 +1,27 @@
-<%= form_for(:session, url: login_path) do |f| %>
-  <%= f.label :username %><br>
-  <%= f.text_field :username, class: 'form-control' %>
+<%= form_for(:session, url: login_path, :html => {:class => 'ui form'}) do |f| %>
 
-  <%= f.label :password %><br>
-  <%= f.password_field :password, class: 'form-control' %>
+  <% flash.each do |message_type, message| %>
+    <div class="ui negative message">
+      <i class="close icon"></i>
+      <%= message %>
+    </div>
+  <% end %>
 
-  <%= f.submit "Login" %>
+  <div class="ui stacked segment">
+
+	  <div class="field">
+	  	<%= f.label :username %>
+		  <%= f.text_field :username, class: 'form-control' %>
+	  </div>
+
+    <div class="field">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+    </div>
+
+    <div class="actions right-align">
+      <%= f.submit :class => 'ui blue submit button', :value => 'Login' %>
+    </div>
+
+	</div>
 <% end %>
