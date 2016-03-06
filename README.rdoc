@@ -1,42 +1,52 @@
-== README
+= Team Up
 
-Use Cases
-----------
--User logs into the system with authentication
--User views their profile page
--User views a list of users narrowed by proficiencies
--User views another user's profile page
--User endorses a proficiency on their profile or another's profile
--User adds a game to their profile
--User makes a team
--User adds other users to the team
+TeamUp is a a web app that tracks players' gaming skills. A person is able to make an account and add a video game to their account. A video game has a list of static proficiencies. To use Counter Strike (first person shooter) as an example, the proficiencies associated with this game include "AK47", "Desert Eagle", etc. People are able to endorse other people's proficiencies. This is a useful tool for building teams for video games because a user is able to look through a database of players using a variety of search criteria. Similarly, individual users are able to look up teams and send requests to join one or more teams. Proficiencies will be static and added by the administrators/developers. That is, users cannot create new proficiencies for a game. Each proficiency will have a page containing relevant material, such as guides or news in the form of posts. For example, "Desert Eagle Proficiency" might have a link to a YouTube video tutorial explaining how to best achieve head shots with the Desert Eagle in the game.
 
-Entities
----------
--User: username (PID), password, games, proficiencies in each game, endorsements for each proficiency, picture URL, list of teams, description, permission level
--Team: id (PID), name, game, description, list of players, position of player on team, community rating, location, picture URL
--Proficiency: id (PID), game, name, description, picture URL, list of relevant posts
--Game: name (PID), description, picture URL
--ProficiencyPost: id (PID), title, author, date, proficiency, content
+== Use Cases
 
-Join Tables
------------
-User -> Proficiency: username, proficiency id, CSV of usernames who have endorsed the proficiency
-User -> Team: username, team id, position on team
-User -> Game: username, game name
+* User logs into the system with authentication
+* User views their profile page
+* User views a list of users narrowed by proficiencies
+* User views another user's profile page
+* User endorses a proficiency on their profile or another's profile
+* User adds a game to their profile
+* User creates a team
+* User submits request to join a team
+* User accepts request to join their team
+* User adds other users to the team
 
-Description:
-------------
-The name we're using for this project is "TeamUp". The idea is similar to the competency tracker. TeamUp is supposed to a website that will track players' gaming skills. A person should be able to make an account and add a video game to their account. A video game will have a list of static skills. To use Counter Strike (first person shooter) as an example, the skills associated with this game would be things like "AK47 proficiency", "Desert Eagle Proficiency", etc. People should be able to endorse other people's proficiencies. This will be a useful tool for building teams for video games because a user should be able look through a database of players using a variety of search criteria and send team requests to people. Similarly, individual users should be able to look up teams and be able to send team requests to join the teams. Skills will be static and added by the developers (i.e. users cannot create new skills). Each unique skill will have a page containing relevant material, such as guides or news posts. For example "Desert Eagle Proficiency" might have a YouTube video tutorial explaining how to best achieve head shots with the Desert Eagle in the game.
+== Entities
 
-==March 1st, 2016 (Lab 1)
--Created the Project
--Static Homepage
--Heroku Integration
+* User: username (PID), password, games, proficiencies in each game, endorsements for each proficiency, picture URL, list of teams, description, permission level
+* Team: id (PID), name, game, description, list of players, position of player on team, community rating, location, picture URL
+* Proficiency: id (PID), game, name, description, picture URL, list of relevant posts
+* Game: name (PID), description, picture URL
+* ProficiencyPost: id (PID), title, author, date, proficiency, content
 
-==March 3rd, 2016 (Lab 2)
--Laid out the ground plan for the project, and identified all relevant entities and use cases.
--Discussed integrity issues that users could exploit, including:
-	->Improper use of the endorsement
-	->Reliance on users to provide accurate information for teams (ex: wins/losses)
-	->Poor indication of team skill level by community rating
+== Join Tables
+
+* User -> Proficiency: username, proficiency id, CSV of usernames who have endorsed the proficiency
+* User -> Team: username, team id, position on team
+* User -> Game: username, game name
+
+== Updates
+
+=== March 1st, 2016 (Lab 1)
+
+* Created the Project
+* Static Homepage
+* Circle CI Integration
+* Heroku Integration
+* Initial Vagrant setup
+
+=== March 3rd, 2016 (Lab 2)
+
+* Laid out the ground plan for the project
+* Listed out all of the use cases
+* Identified all relevant entities 
+* Designed the database schema
+* Created an initial backlog of tasks
+* Discussed integrity issues that users could exploit, including:
+  * Improper use of the endorsement
+  * Reliance on users to provide accurate information for teams (ex: wins/losses)
+  * Poor indication of team skill level by community rating
