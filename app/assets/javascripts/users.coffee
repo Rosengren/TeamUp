@@ -18,11 +18,15 @@ $ ->
 	  				{
 	  					type	: 'empty',
 	  					prompt	: 'Please enter a password'
+	  				},
+	  				{
+	  					type	: 'minLength[6]',
+	  					prompt	: 'Password must be at least 6 characters long'
 	  				}
 	  			]
 	  		},
-	  		verifyPassword : {
-	  			identifier	: 'verifyPassword',
+	  		user_password_confirmation : {
+	  			identifier	: 'user_password_confirmation',
 	  			rules: [
 	  				{
 	  					type 		: 'match[user_password]',
@@ -34,6 +38,5 @@ $ ->
 	  })
 	;
 
-	$('form').submit ->
-	  $('.never-submit').prop 'disabled', true
-	  true
+	$('.message .close').on 'click', ->
+    	$(this).closest('.message').transition('fade')

@@ -1,0 +1,35 @@
+<%= form_for(@user, :html => {:class => 'ui form'}) do |f| %>
+  <% if @user.errors.any? %>
+    <div class="ui negative message">
+      <i class="close icon"></i>
+      <div class="header">
+        Account details could not be updated
+      </div>
+
+      <ul class="list">
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="ui stacked segment">
+
+    <div class="field">
+      <%= f.label :password %><br>
+      <%= f.password_field :password %>
+    </div>
+    <div class="field">
+      <%= f.label :password_confirmation %><br>
+      <%= f.password_field :password_confirmation, :class => 'never-submit' %>
+    </div>
+
+    <div class="ui error message"></div>
+
+    <div class="actions right-align">
+      <%= f.submit(:class => 'ui blue submit button', :value => 'Update') %>
+    </div>
+
+  </div>
+<% end %>

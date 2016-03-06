@@ -2,14 +2,14 @@
 
 one:
   username: MyString
-  password: MyString
+  password_digest: MyString
   description: MyText
   picture_url: MyText
   permission_level: 1
 
 two:
   username: MyString
-  password: MyString
+  password_digest: MyString
   description: MyText
   picture_url: MyText
   permission_level: 1

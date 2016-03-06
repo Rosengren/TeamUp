@@ -15,15 +15,15 @@
 
     <div class="field">
       <%= f.label :username %><br>
-      <%= f.text_field :username, :name => 'user[username]' %>
+      <%= f.text_field :username %>
     </div>
     <div class="field">
       <%= f.label :password %><br>
-      <%= f.password_field :password, :name => 'user[password]' %>
+      <%= f.password_field :password %>
     </div>
     <div class="field">
-      <%= f.label 'Verify Password' %><br>
-      <input type="password" name="verifyPassword" class="never-submit">
+      <%= f.label :password_confirmation %><br>
+      <%= f.password_field :password_confirmation %>
     </div>
 
     <div class="ui error message"></div>
