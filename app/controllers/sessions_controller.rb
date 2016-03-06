@@ -7,10 +7,11 @@ class SessionsController < ApplicationController
     #try to login
     if user && user.authenticate(params[:session][:password])
       #LogIn
-      flash.now[:danger] = 'HOORAY'
-      render 'new'
+      flash.now[:notice] = 'Logged in Successfully!'
+      login user
+      redirect_to user #goes to user's profile
     else
-      flash.now[:danger] = 'Incorrect username/password combination'
+      flash.now[:danger] = 'Incorrect username/password combination.'
       render 'new'
     end
   end
