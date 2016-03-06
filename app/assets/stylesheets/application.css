@@ -44,24 +44,10 @@ body {
     font-weight: 700;
 }
 
-/* Header */
-
-.welcome-header {
-    display: table;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background: url(https://s3-us-west-2.amazonaws.com/team-up/gamer.jpg) no-repeat center center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-}
-
 .oranged {
     color: orange;
 }
 
-h1.ui.center.aligned.header.margin-top {
-    margin-top: 3em;
+h1.ui.center.aligned.header.padding-top {
+    padding-top: 3em;
 }

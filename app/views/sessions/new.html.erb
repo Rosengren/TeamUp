@@ -1,12 +1,8 @@
-<% flash.each do |message_type, message| %>
-  <div class="alert alert-<%= message_type %>"><%= message %></div>
-<% end %>
-
-<header id="top" class="header">
-    <div class="text-vertical-center oranged">
-        <h1>TeamUp</h1>
-	<div style="margin: 0 auto; width:50%">
-          <%= render "sessions/login" || 'Login Page Error' %>
-        </div>
-    </div>
-</header>
+<h1 class="ui center aligned header padding-top">Login</h1>
+<div class="ui text container">
+    <%= render "sessions/login" || 'Login Page Error' %>
+  <div class="ui segment center aligned">
+    Don't have an account?
+    <a href="/signup">Sign Up Here!</a>
+  </div>
+</div>

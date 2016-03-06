@@ -17,12 +17,18 @@
   <div class="ui stacked segment">
 
     <div class="field">
-      <%= f.label :password %><br>
+      <%= f.label :password %>
       <%= f.password_field :password %>
     </div>
+
     <div class="field">
-      <%= f.label :password_confirmation %><br>
-      <%= f.password_field :password_confirmation, :class => 'never-submit' %>
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+
+    <div class="field">
+      <%= f.label :description %>
+      <%= f.text_area :description %>
     </div>
 
     <div class="ui error message"></div>
