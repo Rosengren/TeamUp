@@ -51,3 +51,66 @@ body {
 h1.ui.center.aligned.header.padding-top {
     padding-top: 3em;
 }
+
+#teamUp.index .following.bar {
+    position: fixed;
+    top: 0;
+    z-index: 900;
+    left: 0;
+    padding: 1em 0;
+    width: 100%;
+    box-shadow: 0 0 0 0 transparent;
+    border-bottom: 1px solid transparent;
+    transition:
+            padding 0.5s ease,
+            background 0.5s ease,
+            box-shadow 0.5s ease,
+            border 0.5s ease;
+}
+
+#teamUp.index .following.bar > .menu .item {
+    transition: all 0.5s ease;
+}
+#teamUp.index.pushed .following.bar .menu .item,
+#teamUp.index.pushed .following.bar {
+    transition: none;
+}
+#teamUp.index .following.bar .additional.item[data-site="learn"]:hover {
+    color: #D9499A;
+}
+#teamUp.index .following.bar span.additional.item {
+    cursor: default;
+    color: rgba(0, 0, 0, 0.2);
+}
+#teamUp.index .following.bar span.additional.item {
+    color: rgba(255, 255, 255, 0.2);
+}
+#teamUp.index .following.bar .column > .menu {
+    margin-top: 0;
+    height: 35px;
+}
+#teamUp.index .following.bar .item iframe {
+    margin-left: 10px;
+}
+#teamUp.index .following.bar .view-ui {
+    margin-right: 1em;
+}
+#teamUp.index .following .logo {
+    float: left;
+    width: 35px;
+    margin-right: 1em;
+}
+#teamUp.index .following .logo .side {
+    width: 35px;
+}
+
+#teamUp.index .pusher > .page {
+    background-color: #FFFFFF;
+}
+
+#teamUp.index .light.following.bar {
+    padding: 1em 0;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #DDDDDD;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.04);
+}

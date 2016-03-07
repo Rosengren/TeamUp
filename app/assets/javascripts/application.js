@@ -14,3 +14,28 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function() {
+  $('body')
+    .visibility({
+        offset         : -10,
+        observeChanges : false,
+        once           : false,
+        continuous     : false,
+        onTopPassed: function() {
+          requestAnimationFrame(function() {
+              $('.following.bar')
+                .addClass('light fixed')
+              ;
+          });
+        },
+        onTopPassedReverse: function() {
+          requestAnimationFrame(function() {
+            $('.following.bar')
+              .removeClass('light fixed')
+            ;
+          });
+        }
+    })
+  ;
+});
