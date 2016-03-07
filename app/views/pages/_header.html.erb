@@ -1,0 +1,21 @@
+<div class="following bar">
+    <div class="ui container">
+        <div class="ui large secondary menu">
+            <div class="right menu">
+                <% if logged_in? %>
+                    <div class="item">
+                        <%= link_to current_user.username, current_user %>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="item">
+                        <%= link_to "Log out", logout_path, method: "delete" %>
+                    </div>
+                <% else %>
+                    <div class="item">
+                        <%= link_to "Log in", login_path %>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

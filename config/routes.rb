@@ -5,12 +5,8 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # Root of site, depending on whether you are logged in or not
-  #authenticated :user do
-  #  root to: "users#profile"
-  #end
   root 'sessions#new'
 
-  get    '/'       => 'sessions#new'
   get    'profile' => 'users#show'
   get	 'signup'  => 'users#new'
   get    'login'   => 'sessions#new'

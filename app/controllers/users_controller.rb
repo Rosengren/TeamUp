@@ -28,6 +28,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        login @user
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -61,8 +62,14 @@ class UsersController < ApplicationController
     end
   end
 
+  # /profile
   def profile
     redirect_to @user
+  end
+
+  # restrict user if not logged in
+  def allowed?
+    !session[:session_key].nil?
   end
 
   private
