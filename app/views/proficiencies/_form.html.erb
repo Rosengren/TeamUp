@@ -10,10 +10,10 @@
       </ul>
     </div>
   <% end %>
-
+  
   <div class="field">
     <%= f.label :game %><br>
-    <%= f.text_field :game %>
+    <%= f.collection_select( :game_id, Game.all, :id, :name) %>
   </div>
   <div class="field">
     <%= f.label :name %><br>
