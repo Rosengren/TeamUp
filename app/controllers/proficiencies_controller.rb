@@ -10,6 +10,7 @@ class ProficienciesController < ApplicationController
   # GET /proficiencies/1
   # GET /proficiencies/1.json
   def show
+    @proficiency_posts = ProficiencyPost.find_by(proficiency_id: @proficiency.id)
   end
 
   # GET /proficiencies/new

@@ -1,24 +1,30 @@
-<p id="notice"><%= notice %></p>
+<div class="ui stacked segment padding-top">
+    <h1><%= @proficiency.game.name %> - <%= @proficiency.name %></h1> 
 
-<p>
-  <strong>Game:</strong>
-  <%= @proficiency.game %>
-</p>
+  <div class="field">
+    <%= @proficiency.description %>
+  </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @proficiency.name %>
-</p>
+  <img src="<%= @proficiency.picture_url %>"/>
+  </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @proficiency.description %>
-</p>
+  <tbody>
+  <% @proficiency.proficiency_posts.each do |proficiency_post| %>
+    <tr>
+      <td><%= proficiency_post.title %></td>
+      <td><%= proficiency_post.username %></td>
+      <td><%= proficiency_post.date %></td>
+      <td><%= proficiency_post.content %></td>
+      <td><%= link_to 'Show', proficiency_post %></td>
+      <td><%= link_to 'Edit', edit_proficiency_post_path(proficiency_post) %></td>
+      <td><%= link_to 'Destroy', proficiency_post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+  <% if @user.permission_level > 1 %>
+  <%= link_to 'Proficiency Post', new_proficiency_post_path(:proficiency =>  @proficiency)%>
+  <% end %>
+  <br/>
 
-<p>
-  <strong>Picture url:</strong>
-  <%= @proficiency.picture_url %>
-</p>
-
-<%= link_to 'Edit', edit_proficiency_path(@proficiency) %> |
-<%= link_to 'Back', proficiencies_path %>
+  <%= link_to 'All Proficiencies', proficiencies_path %>
+</div>

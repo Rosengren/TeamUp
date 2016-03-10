@@ -47,12 +47,12 @@ ActiveRecord::Schema.define(version: 20160303195500) do
     t.string   "username"
     t.datetime "date"
     t.text     "content"
-    t.integer  "profiency_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "proficiency_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
-  add_index "proficiency_posts", ["profiency_id"], name: "index_proficiency_posts_on_profiency_id"
+  add_index "proficiency_posts", ["proficiency_id"], name: "index_proficiency_posts_on_proficiency_id"
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"
