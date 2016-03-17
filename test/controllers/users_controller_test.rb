@@ -23,6 +23,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
+    session[:session_key] = @user.id
     get :edit, id: @user
     assert_response :success
   end
