@@ -16,7 +16,10 @@ gem 'coffee-rails', '~> 4.1.0'
 # Database diagnostic tool
 gem 'hirb'
 
+# Fuzzy search for database queries
 gem 'fuzzy_match'
+
+gem 'semantic-ui-sass'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
