@@ -3,7 +3,11 @@
     <div class="ui secondary menu">
       <div class="item">
         <div class="ui logo">
-          <%= link_to 'TeamUp', current_user %>
+          <% if logged_in? %>
+            <%= link_to 'TeamUp', current_user %>
+          <% else %>
+            <a href="/login">TeamUp</a>
+          <% end %>
         </div>
       </div>
       <div class="right menu">
