@@ -1,24 +1,35 @@
-<p id="notice"><%= notice %></p>
+<div class="profile-page">
+  <div class="ui container">
+    <div class="ui container profile-header">
+      <%= @user.picture_url %>
+      <img class="ui centered bordered large circular image" src="https://pbs.twimg.com/profile_images/557531113237663745/Hj-4gyG6.jpeg">
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
+      <h1 class="ui centered huge header"><%= @user.username %></h1>
 
-<p>
-  <strong>Description:</strong>
-  <%= @user.description %>
-</p>
+      <h3 class="ui header">Bio</h3>
+    </div>
 
-<p>
-  <strong>Picture url:</strong>
-  <%= @user.picture_url %>
-</p>
+    <div class="ui three statistics">
+      <div class="statistic">
+        <div class="value">2</div>
+        <div class="label">Games</div>
+      </div>
+      <div class="statistic">
+        <div class="value">12</div>
+        <div class="label">Proficiencies</div>
+      </div>
+      <div class="statistic">
+        <div class="value">10</div>
+        <div class="label">Rating</div>
+      </div>
+    </div>
 
-<p>
-  <strong>Permission level:</strong>
-  <%= @user.permission_level %>
-</p>
+    <%= render 'game_proficiency' %>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+    <p id="notice"><%= notice %></p>
+
+    <br/><br/>
+    <%= link_to 'Edit', edit_user_path(@user) %> |
+    <%= link_to 'Back', users_path %>
+  </div>
+</div>
