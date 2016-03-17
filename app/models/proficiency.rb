@@ -2,14 +2,12 @@ class Proficiency < ActiveRecord::Base
   has_many :proficiency_posts
   has_many :user_proficiencies
   belongs_to :game
-  belongs_to :user
+  has_many :users, through: :user_proficiencies
+  accepts_nested_attributes_for :proficiency_posts
 
-  #covert all proficiency names to lowercase and substitute spaces for underscores
-  def slug
-    name.downcase.gsub(" ", "_")
-  end
+  validates_presence_of :slug
 
   def to_param
-    "#{id}_#{slug}"
+    slug
   end
 end

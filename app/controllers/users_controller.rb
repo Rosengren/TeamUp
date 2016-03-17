@@ -19,6 +19,9 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    if @user.id != session[:session_key]
+      redirect_to action: :show
+    end
   end
 
   # POST /users

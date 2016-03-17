@@ -4,8 +4,8 @@ class CreateProficiencies < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.text :picture_url
+      t.string :slug
       t.belongs_to :game, index: true
-      t.belongs_to :users, index: true
 
       t.timestamps null: false
     end

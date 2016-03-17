@@ -1,4 +1,4 @@
-<%= form_for(@proficiency_post) do |f| %>
+<%= form_for(@game, @proficiency, @proficiency_post) do |f| %>
   <% if @proficiency_post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@proficiency_post.errors.count, "error") %> prohibited this proficiency_post from being saved:</h2>
