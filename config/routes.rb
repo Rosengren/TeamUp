@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   root 'sessions#new'
 
   get    'profile' => 'users#show'
-  get	 'signup'  => 'users#new'
+  get    'signup'  => 'users#new'
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
@@ -62,4 +62,7 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  namespace :search do
+    resources :all
+  end
 end

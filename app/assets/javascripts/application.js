@@ -16,10 +16,12 @@
 //= require_tree .
 
 $(document).ready(function() {
-
   $.fn.api.settings.api = {
-    'search' : '#'
+    'search' : '/search/all?q={query}'
   };
+});
+
+$(document).on('ready page:load', function() {
 
   $('body')
     .visibility({
@@ -48,13 +50,48 @@ $(document).ready(function() {
     .search({
       type          : 'category',
       action        : 'search',
-      minCharacters : 3,
+      minCharacters : 2,
       apiSettings   : {
-        onResponse: function(response) {
+        onResponse: function(queryResponse) {
+
+          var response = {
+                results : {}
+          };
+
+          $.each(queryResponse, function(index, item) {
+            var
+              category   = item.category || 'Unknown',
+              maxResults = 8
+            ;
+
+            if(index >= maxResults) {
+              return false;
+            }
+
+            // create new category
+            if(response.results[category] === undefined) {
+              response.results[category] = {
+                name    : category,
+                results : []
+              };
+            }
+
+            // add result to category
+            response.results[category].results.push({
+              title : item.name,
+              url   : item.url
+            });
+
+          });
+
           return response;
         }
       }
     })
+  ;
+
+  $('.ui.icon')
+    .popup()
   ;
 
 });
