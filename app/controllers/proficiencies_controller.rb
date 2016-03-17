@@ -10,6 +10,8 @@ class ProficienciesController < ApplicationController
   # GET /proficiencies/1
   # GET /proficiencies/1.json
   def show
+    @proficiency_posts = ProficiencyPost.where(proficiency_id: @proficiency.id)
+    @game = @proficiency.game != nil ? @proficiency.game.name : "Proficiency ";
   end
 
   # GET /proficiencies/new
