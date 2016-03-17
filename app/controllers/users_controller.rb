@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  helper_method :is_current_user?
 
   # GET /users
   # GET /users.json
@@ -19,6 +20,9 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    if @user.id != session[:session_key]
+      redirect_to action: :show
+    end
   end
 
   # POST /users
@@ -71,6 +75,10 @@ class UsersController < ApplicationController
   # restrict user if not logged in
   def allowed?
     !session[:session_key].nil?
+  end
+
+  def is_current_user?
+    @user.id == session[:session_key]
   end
 
   private
