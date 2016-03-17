@@ -1,23 +1,38 @@
 <div class="following bar">
-    <div class="ui container">
-        <div class="ui large secondary menu">
-            <div class="right menu">
-                <% if logged_in? %>
-                    <div class="item">
-                        <%= link_to current_user.username, current_user %>
-                    </div>
-                    <div class="item">
-                        <%= link_to 'Settings', edit_user_path(@user) %>
-                    </div>
-                    <div class="item">
-                        <%= link_to "Log out", logout_path, method: "delete" %>
-                    </div>
-                <% else %>
-                    <div class="item">
-                        <%= link_to "Log in", login_path %>
-                    </div>
-                <% end %>
-            </div>
+  <div class="ui container">
+    <div class="ui large secondary menu">
+      <div class="item">
+        <div class="ui logo">
+          <%= link_to 'TeamUp', current_user %>
         </div>
+      </div>
+      <div class="right menu">
+        <% if logged_in? %>
+
+          <div class="ui category search item">
+            <div class="ui icon input">
+              <input class="prompt" type="text" placeholder="Search...">
+              <i class="search icon"></i>
+            </div>
+            <div class="results"></div>
+          </div>
+
+          <div class="ui dropdown item">
+            Profile
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <%= link_to current_user.username, current_user, class: 'item' %>
+              <%= link_to 'Settings', edit_user_path(@user), class: 'item' %>
+              <%= link_to "Log out", logout_path, method: "delete", class: 'item' %>
+            </div>
+          </div>
+
+        <% else %>
+          <div class="item">
+              <%= link_to "Log in", login_path %>
+          </div>
+        <% end %>
+      </div>
     </div>
+  </div>
 </div>
