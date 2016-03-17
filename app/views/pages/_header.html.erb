@@ -22,7 +22,7 @@
             <i class="dropdown icon"></i>
             <div class="menu">
               <%= link_to current_user.username, current_user, class: 'item' %>
-              <%= link_to 'Settings', edit_user_path(@user), class: 'item' %>
+              <%= link_to 'Settings', edit_user_path(current_user.id), class: 'item' %>
               <%= link_to "Log out", logout_path, method: "delete", class: 'item' %>
             </div>
           </div>
