@@ -5,26 +5,26 @@
     <%= @proficiency.description %>
   </div>
 
-  <img src="<%= @proficiency.picture_url %>"/>
+  <img src="<%= @proficiency.picture_url %>" width="100px" height="100px"/>
   </div>
 
-  <tbody>
-  <% @proficiency.proficiency_posts.each do |proficiency_post| %>
-    <tr>
-      <td><%= proficiency_post.title %></td>
-      <td><%= proficiency_post.username %></td>
-      <td><%= proficiency_post.date %></td>
-      <td><%= proficiency_post.content %></td>
-      <td><%= link_to 'Show', proficiency_post %></td>
-      <td><%= link_to 'Edit', edit_proficiency_post_path(proficiency_post) %></td>
-      <td><%= link_to 'Destroy', proficiency_post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
+  <% if @proficiency_posts != nil %>
+    <div class="ui list">
+      <% @proficiency_posts.each do |proficiency_post| %>
+        <div class="item">
+          <div class="header"><%= proficiency_post.username %> - <%= proficiency_post.title %></div>
+          <div class="meta"><%= proficiency_post.date.to_formatted_s(:long) %></div>
+          <div class="description"><%= proficiency_post.content %></div>
+        </div>
+      <% end %>
+    </tbody>
   <% end %>
-  </tbody>
-  <% if @user.permission_level > 1 %>
-  <%= link_to 'Proficiency Post', new_proficiency_post_path(:proficiency =>  @proficiency)%>
-  <% end %>
-  <br/>
 
+  <% if @permission > 1 %>
+    <br/>
+    <%= link_to 'Create New Proficiency Post', new_proficiency_post_path(:proficiency =>  @proficiency)%>
+  <% end %>
+
+  <br/>
   <%= link_to 'All Proficiencies', proficiencies_path %>
 </div>
