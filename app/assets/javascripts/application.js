@@ -16,6 +16,11 @@
 //= require_tree .
 
 $(document).ready(function() {
+
+  $.fn.api.settings.api = {
+    'search' : '#'
+  };
+
   $('body')
     .visibility({
         offset         : -10,
@@ -38,4 +43,18 @@ $(document).ready(function() {
         }
     })
   ;
+
+  $('.ui.category.search')
+    .search({
+      type          : 'category',
+      action        : 'search',
+      minCharacters : 3,
+      apiSettings   : {
+        onResponse: function(response) {
+          return response;
+        }
+      }
+    })
+  ;
+
 });
