@@ -19,9 +19,6 @@ gem 'hirb'
 # Fuzzy search for database queries
 gem 'fuzzy_match'
 
-# Semantic-UI Front-end framework
-gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
-
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
