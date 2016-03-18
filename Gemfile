@@ -19,7 +19,8 @@ gem 'hirb'
 # Fuzzy search for database queries
 gem 'fuzzy_match'
 
-gem 'semantic-ui-sass'
+# Semantic-UI Front-end framework
+gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
