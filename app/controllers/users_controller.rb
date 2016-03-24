@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  helper_method :is_current_user?
+  helper_method :is_current_user?, :proficiencies_for_game, :endorsements_for_proficiency, :get_list_of_games
 
   # GET /users
   # GET /users.json
@@ -79,6 +79,19 @@ class UsersController < ApplicationController
 
   def is_current_user?
     @user.id == session[:session_key]
+  end
+
+  def proficiencies_for_game(game)
+    @user.proficiencies.where game_id: game.id
+  end
+
+  def endorsements_for_proficiency(proficiency)
+    # TODO: implement this once endorsements had been added
+    "List of endorsements"
+  end
+
+  def get_list_of_games
+    Game.all.select "id, name"
   end
 
   private

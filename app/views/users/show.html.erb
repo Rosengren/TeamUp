@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <%= render 'game_proficiency' %>
+    <%= render 'game_proficiency', :user => @user %>
 
     <p id="notice"><%= notice %></p>
 
@@ -48,11 +48,8 @@
         <form class="ui add game form" id="addGameForm">
           <div class="field">
             <label>Select Game</label>
-            <select name="game" class="ui fluid dropdown">
-              <option value>Game</option>
-              <option value="call_of_duty">Call of Duty</option>
-              <option value="league_of_legends">League of Legends</option>
-            </select>
+            <%= collection_select(:post, :game_id, Game.all, :id, :name, {}, {:class => 'ui form dropdown'}) %>
+
           </div>
 
           <div class="ui error message"></div>
