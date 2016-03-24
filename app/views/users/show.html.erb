@@ -45,16 +45,18 @@
         Add Game to Profile
       </div>
       <div class="content">
-        <form class="ui add game form" id="addGameForm">
+
+        <%= form_for(@games_user, :html => {:class => 'ui add game form', id: 'addGameForm'}) do |f| %>
+
           <div class="field">
             <label>Select Game</label>
-            <%= collection_select(:post, :game_id, Game.all, :id, :name, {}, {:class => 'ui form dropdown'}) %>
-
+            <%= collection_select(:games_user, :game_id, Game.all, :id, :name, {}, {:class => 'ui form dropdown'}) %>
+            <%= f.hidden_field :user_id, :value => @user.id %>
           </div>
 
           <div class="ui error message"></div>
 
-        </form>
+        <% end %>
       </div>
       <div class="actions">
         <div class="ui negative button">
