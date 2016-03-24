@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, :set_games_user, :set_user_proficiency, only: [:show, :edit, :update, :destroy]
-  helper_method :is_current_user?, :proficiencies_for_game, :endorsements_for_proficiency, :get_list_of_games
+  before_action :set_user, :set_games_user, :set_user_proficiency,
+      only: [:show, :edit, :update, :destroy]
+  helper_method :is_current_user?, :proficiencies_for_game, :get_list_of_games,
+      :endorsements_for_proficiency, :number_of_games, :number_of_proficiencies,
+      :user_rating
 
   # GET /users
   # GET /users.json
@@ -94,10 +97,27 @@ class UsersController < ApplicationController
     Game.all.select "id, name"
   end
 
+  def number_of_games
+    @user.games.count
+  end
+
+  def number_of_proficiencies
+    @user.games.inject(0){ |sum, game| sum += game.proficiencies.count }
+  end
+
+  def user_rating
+    # TODO: implement ratings
+    12
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+      if @user.picture_url.blank?
+        # add default image
+        @user.picture_url = 'https://s-media-cache-ak0.pinimg.com/736x/dd/11/1f/dd111ff5042dc332fef3e297df41ea75.jpg'
+      end
     end
 
     def set_games_user
