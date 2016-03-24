@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :games
   has_many :teams, through: :user_teams
   has_many :proficiencies, through: :user_proficiencies
-  validates :username, presence: true
+  validates :username, presence: true, uniqueness: true
   validates :password, presence: true, length: {minimum: 7}
   has_secure_password
 end

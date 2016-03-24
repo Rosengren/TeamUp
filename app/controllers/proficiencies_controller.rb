@@ -10,8 +10,14 @@ class ProficienciesController < ApplicationController
   # GET /proficiencies/1
   # GET /proficiencies/1.json
   def show
+    @proficiency = Proficiency.find_by_slug(params[:id])
+
+    if @proficiency.nil?
+      raise ActionController::RoutingError.new('Not Found')
+    end
+
     @proficiency_posts = ProficiencyPost.where(proficiency_id: @proficiency.id)
-    @game = @proficiency.game != nil ? @proficiency.game.name : "Proficiency ";
+    @game = !@proficiency.game.nil? ? @proficiency.game.name : "Proficiency ";
   end
 
   # GET /proficiencies/new
@@ -27,6 +33,7 @@ class ProficienciesController < ApplicationController
   # POST /proficiencies.json
   def create
     @proficiency = Proficiency.new(proficiency_params)
+    @proficiency.slug = @proficiency.name.downcase.gsub(" ", "-")
 
     respond_to do |format|
       if @proficiency.save
@@ -66,7 +73,7 @@ class ProficienciesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_proficiency
-      @proficiency = Proficiency.find(params[:id])
+      @proficiency = Proficiency.find_by_slug(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

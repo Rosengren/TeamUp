@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  resources :teams, :users, :proficiency_posts, :proficiencies, :games, :games_users, :user_proficiencies
+  resources :games_users
+  resources :user_proficiencies
+  resources :teams
+  resources :users
+  resources :games do
+    resources :proficiencies, except: :index do
+      resources :proficiency_posts, only: [:create]
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

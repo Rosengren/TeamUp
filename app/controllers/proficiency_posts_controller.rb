@@ -25,6 +25,7 @@ class ProficiencyPostsController < ApplicationController
   # POST /proficiency_posts.json
   def create
     @proficiency_post = ProficiencyPost.new(proficiency_post_params)
+    @proficiency_post.proficiency_id = params[:proficiency_id]
 
     respond_to do |format|
       if @proficiency_post.save

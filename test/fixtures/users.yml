@@ -8,7 +8,7 @@ one:
   permission_level: 1
 
 two:
-  username: MyString
+  username: MyString2
   password_digest: MyString
   description: MyText
   picture_url: MyText

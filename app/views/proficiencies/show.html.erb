@@ -21,10 +21,8 @@
   <% end %>
 
   <% if @permission > 1 %>
-    <br/>
-    <%= link_to 'Create New Proficiency Post', new_proficiency_post_path(:proficiency =>  @proficiency)%>
+    <%# INSERT THE MODAL HERE %>
   <% end %>
 
   <br/>
-  <%= link_to 'All Proficiencies', proficiencies_path %>
 </div>
