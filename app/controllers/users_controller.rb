@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  helper_method :is_current_user?
+  before_action :set_user, :set_games_user, :set_user_proficiency, only: [:show, :edit, :update, :destroy]
+  helper_method :is_current_user?, :proficiencies_for_game, :endorsements_for_proficiency, :get_list_of_games
 
   # GET /users
   # GET /users.json
@@ -81,10 +81,31 @@ class UsersController < ApplicationController
     @user.id == session[:session_key]
   end
 
+  def proficiencies_for_game(game)
+    @user.proficiencies.where game_id: game.id
+  end
+
+  def endorsements_for_proficiency(proficiency)
+    # TODO: implement this once endorsements had been added
+    "List of endorsements"
+  end
+
+  def get_list_of_games
+    Game.all.select "id, name"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def set_games_user
+      @games_user = GamesUser.new
+    end
+
+    def set_user_proficiency
+      @user_proficiency = UserProficiency.new
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

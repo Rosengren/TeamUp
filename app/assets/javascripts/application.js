@@ -17,7 +17,8 @@
 
 $(document).ready(function() {
   $.fn.api.settings.api = {
-    'search' : '/search/all?q={query}'
+    'search' : '/search/all?q={query}',
+    'search proficiencies' : '/search/proficiencies?game={id}&q={query}'
   };
 });
 

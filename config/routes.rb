@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :games_users
+  resources :user_proficiencies
   resources :teams
   resources :users
   resources :games do
@@ -6,7 +8,7 @@ Rails.application.routes.draw do
       resources :proficiency_posts, only: [:create]
     end
   end
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -70,5 +72,6 @@ Rails.application.routes.draw do
   #   end
   namespace :search do
     resources :all
+    resources :proficiencies
   end
 end
