@@ -35,7 +35,7 @@
     </tbody>
   </table>
   <% if is_current_user? %>
-    <div class="ui bottom attached blue button add_proficiency_to_user">Add Proficiency</div>
+    <div class="ui bottom attached blue button add_proficiency_to_user" data="<%= game.id %>">Add Proficiency</div>
   <% end %>
 </div>
 <% end %>

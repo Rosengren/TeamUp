@@ -25,16 +25,9 @@ class UserProficienciesController < ApplicationController
   # POST /user_proficiencies.json
   def create
     @user_proficiency = UserProficiency.new(user_proficiency_params)
-
-    respond_to do |format|
-      if @user_proficiency.save
-        format.html { redirect_to @user_proficiency, notice: 'User proficiency was successfully created.' }
-        format.json { render :show, status: :created, location: @user_proficiency }
-      else
-        format.html { render :new }
-        format.json { render json: @user_proficiency.errors, status: :unprocessable_entity }
-      end
-    end
+    @user_proficiency.save
+    # TODO: May want to return a success message
+    redirect_to(:back)
   end
 
   # PATCH/PUT /user_proficiencies/1
@@ -69,6 +62,6 @@ class UserProficienciesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_proficiency_params
-      params.require(:user_proficiency).permit(:endorsements)
+      params.require(:user_proficiency).permit(:endorsements, :user_id, :proficiency_id)
     end
 end

@@ -17,6 +17,17 @@ $(document).on 'ready page:load', ->
       .modal('show')
 
   $('.add_proficiency_to_user').on 'click', ->
+    $that = $(this)
+    $('.ui.search.selection.dropdown')
+      .dropdown({
+        apiSettings: {
+          action: 'search proficiencies',
+          urlData: {
+            id: $that.attr('data')
+          }
+        }
+      })
+
     $('.small.add.proficiency.modal')
       .modal('show');
 
@@ -82,7 +93,7 @@ $(document).on 'ready page:load', ->
       on: 'submit',
       fields: {
         dropdown: {
-          identifier: 'proficiency',
+          identifier: 'user_proficiency_proficiency_id',
           rules: [
             {
               type    : 'empty',

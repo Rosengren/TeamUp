@@ -69,23 +69,25 @@
 
   <div class="ui small add proficiency modal">
       <div class="header">
-        Add Proficiency to 'game name here'
+        Add Proficiency
       </div>
       <div class="content">
-        <form class="ui add proficiency form" id="addProficiencyForm">
+        <%= form_for(@user_proficiency, :html => {:class => 'ui add proficiency form', id: 'addProficiencyForm'}) do |f| %>
           <div class="field">
             <label>Select Proficiency</label>
-            <select name="proficiency" class="ui fluid dropdown">
-              <option value>Profiency</option>
-              <option value="desert_eagle">Desert Eagle</option>
-              <option value="m16">M16</option>
-            </select>
-
+            <div class="ui search selection dropdown">
+              <%= f.hidden_field :proficiency_id %>
+              <i class="dropdown icon"></i>
+              <input type="text" class="search" tabindex="0">
+              <div class="default text">Select one...</div>
+            </div>
           </div>
+
+          <%= f.hidden_field :user_id, :value => @user.id %>
 
           <div class="ui error message"></div>
 
-        </form>
+        <% end %>
       </div>
       <div class="actions">
         <div class="ui negative button">

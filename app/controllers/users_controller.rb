@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, :set_games_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, :set_games_user, :set_user_proficiency, only: [:show, :edit, :update, :destroy]
   helper_method :is_current_user?, :proficiencies_for_game, :endorsements_for_proficiency, :get_list_of_games
 
   # GET /users
@@ -102,6 +102,10 @@ class UsersController < ApplicationController
 
     def set_games_user
       @games_user = GamesUser.new
+    end
+
+    def set_user_proficiency
+      @user_proficiency = UserProficiency.new
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
