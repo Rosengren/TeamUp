@@ -1,26 +1,25 @@
 <div class="profile-page">
   <div class="ui container">
     <div class="ui container profile-header">
-      <%= @user.picture_url %>
-      <img class="ui centered bordered large circular image" src="https://pbs.twimg.com/profile_images/557531113237663745/Hj-4gyG6.jpeg">
-
+      <%= image_tag @user.picture_url, class: "ui centered bordered large circular image", alt: "Profile Picture" %>
       <h1 class="ui centered huge header"><%= @user.username %></h1>
 
       <h3 class="ui header">Biography</h3>
+      <p><%= @user.description %></p>
     </div>
 
     <div class="ui three statistics">
       <div class="statistic">
-        <div class="value">2</div>
+        <div class="value"><%= number_of_games %></div>
         <div class="label">Games</div>
       </div>
       <div class="statistic">
-        <div class="value">12</div>
+        <div class="value"><%= number_of_proficiencies %></div>
         <div class="label">Proficiencies</div>
       </div>
       <div class="statistic">
-        <div class="value">10</div>
-        <div class="label">Rating</div>
+        <div class="value"><%= user_rating %></div>
+        <div class="label">User Score</div>
       </div>
     </div>
 
