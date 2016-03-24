@@ -14,7 +14,7 @@
     </div>
   </div>
   <h3 class="ui header">Proficiencies</h3>
-  <table class="ui fixed striped table">
+  <table class="ui fixed striped table attached">
     <thead>
       <tr>
         <th>Name</th>
@@ -36,6 +36,9 @@
       </tr>
     </tbody>
   </table>
+  <% if is_current_user? %>
+    <div class="ui bottom attached blue button add_proficiency_to_user">Add Proficiency</div>
+  <% end %>
 </div>
 
 
@@ -60,7 +63,7 @@
 
   </div>
   <h3 class="ui header">Proficiencies</h3>
-  <table class="ui fixed striped table">
+  <table class="ui fixed striped table attached">
     <thead>
       <tr>
         <th>Name</th>
@@ -81,4 +84,7 @@
       </tr>
     </tbody>
   </table>
+  <% if is_current_user? %>
+    <div class="ui bottom attached blue button add_proficiency_to_user">Add Proficiency</div>
+  <% end %>
 </div>

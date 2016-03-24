@@ -50,3 +50,38 @@ TeamUp is a a web app that tracks players' gaming skills. A person is able to ma
   * Improper use of the endorsement
   * Reliance on users to provide accurate information for teams (ex: wins/losses)
   * Poor indication of team skill level by community rating
+  
+  
+=== March 10th, 2016 (Lab 3)
+
+Completed
+* Created user edit page
+* Created user sessions
+* Styled login page
+* Populated the database
+* Created user profile page
+
+To be Completed
+* Update proficiencies form
+* Add database entries
+* Create search functionality
+* Add ability for users to add games and 
+  proficiencies to profile page
+* Create proficiency view page
+* Create UML Diagrams
+
+=== March 17th, 2016 (Lab 4)
+
+Completed
+* Updated proficiencies form
+* Populated database
+* Added front-end forms for adding proficiencies and games to user profiles
+* Routing
+
+To be Completed
+* Search functionality
+* Create UML Diagrams
+* Create games view page
+* Make profile pages dynamic
+* Create proficiency posts view
+* Create Teams functionality

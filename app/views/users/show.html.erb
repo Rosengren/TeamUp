@@ -6,7 +6,7 @@
 
       <h1 class="ui centered huge header"><%= @user.username %></h1>
 
-      <h3 class="ui header">Bio</h3>
+      <h3 class="ui header">Biography</h3>
     </div>
 
     <div class="ui three statistics">
@@ -28,8 +28,71 @@
 
     <p id="notice"><%= notice %></p>
 
-    <br/><br/>
-    <%= link_to 'Edit', edit_user_path(@user) %> |
-    <%= link_to 'Back', users_path %>
+    <div class="ui section divider"></div>
+
+    <% if is_current_user? %>
+      <h3 class="ui centered header" id="add_game_to_user">
+        Add Game to User Profile
+      </h3>
+      <div class="ui section divider"></div>
+    <% end %>
   </div>
 </div>
+
+<% if is_current_user? %>
+  <div class="ui small add game modal">
+      <div class="header">
+        Add Game to Profile
+      </div>
+      <div class="content">
+        <form class="ui add game form" id="addGameForm">
+          <div class="field">
+            <label>Select Game</label>
+            <select name="game" class="ui fluid dropdown">
+              <option value>Game</option>
+              <option value="call_of_duty">Call of Duty</option>
+              <option value="league_of_legends">League of Legends</option>
+            </select>
+          </div>
+
+          <div class="ui error message"></div>
+
+        </form>
+      </div>
+      <div class="actions">
+        <div class="ui negative button">
+          Cancel
+        </div>
+        <input type="submit" value="submit" form="addGameForm" class="ui positive button">
+      </div>
+  </div>
+
+
+  <div class="ui small add proficiency modal">
+      <div class="header">
+        Add Proficiency to 'game name here'
+      </div>
+      <div class="content">
+        <form class="ui add proficiency form" id="addProficiencyForm">
+          <div class="field">
+            <label>Select Proficiency</label>
+            <select name="proficiency" class="ui fluid dropdown">
+              <option value>Profiency</option>
+              <option value="desert_eagle">Desert Eagle</option>
+              <option value="m16">M16</option>
+            </select>
+
+          </div>
+
+          <div class="ui error message"></div>
+
+        </form>
+      </div>
+      <div class="actions">
+        <div class="ui negative button">
+          Cancel
+        </div>
+        <input type="submit" value="submit" form="addProficiencyForm" class="ui positive button">
+      </div>
+  </div>
+<% end %>
