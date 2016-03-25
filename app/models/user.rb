@@ -7,4 +7,10 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
   validates :password, presence: true, length: {minimum: 7}
   has_secure_password
+
+  validates_presence_of :slug
+
+  def to_param
+    slug
+  end
 end

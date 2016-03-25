@@ -14,6 +14,9 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    if @user.nil?
+      raise ActionController::RoutingError.new('Not Found')
+    end
   end
 
   # GET /users/new
@@ -113,7 +116,7 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find_by_slug(params[:id])
       if @user.picture_url.blank?
         # add default image
         @user.picture_url = 'https://s-media-cache-ak0.pinimg.com/736x/dd/11/1f/dd111ff5042dc332fef3e297df41ea75.jpg'
