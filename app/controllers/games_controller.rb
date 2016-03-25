@@ -10,6 +10,13 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
+    @game = Game.find_by_slug(params[:id])
+
+    if @game.nil?
+      raise ActionController::RoutingError.new('Not Found')
+    end
+
+    @proficiencies = Proficiency.where(game_id: @game.id)
   end
 
   # GET /games/new
