@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration
       t.text :picture_url
       t.integer :permission_level
       t.string :password_digest
+      t.string :slug
 
       t.timestamps null: false
     end

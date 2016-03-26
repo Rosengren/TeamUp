@@ -6,6 +6,7 @@ class CreateTeams < ActiveRecord::Migration
       t.integer :community_rating
       t.string :location
       t.text :picture_url
+      t.string :slug
       t.belongs_to :game, index: true
 
       t.timestamps null: false

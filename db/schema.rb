@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160324194707) do
+ActiveRecord::Schema.define(version: 20160326214310) do
 
   create_table "games", force: :cascade do |t|
     t.string   "name"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20160324194707) do
     t.text     "picture_url"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "slug"
   end
 
   create_table "games_users", force: :cascade do |t|
@@ -37,6 +38,7 @@ ActiveRecord::Schema.define(version: 20160324194707) do
     t.integer  "users_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "slug"
   end
 
   add_index "proficiencies", ["game_id"], name: "index_proficiencies_on_game_id"
@@ -63,6 +65,7 @@ ActiveRecord::Schema.define(version: 20160324194707) do
     t.integer  "game_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "slug"
   end
 
   add_index "teams", ["game_id"], name: "index_teams_on_game_id"
@@ -91,12 +94,13 @@ ActiveRecord::Schema.define(version: 20160324194707) do
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
-    t.string   "password_digest"
     t.text     "description"
     t.text     "picture_url"
     t.integer  "permission_level"
+    t.string   "password_digest"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "slug"
   end
 
   add_index "users", ["username"], name: "index_users_on_username", unique: true

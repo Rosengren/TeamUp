@@ -10,6 +10,11 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
+    @team = Team.find_by_slug(params[:id])
+
+    if @team.nil?
+      raise ActionController::RoutingError.new('Not Found')
+    end
   end
 
   # GET /teams/new
