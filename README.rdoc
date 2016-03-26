@@ -85,3 +85,18 @@ To be Completed
 * Make profile pages dynamic
 * Create proficiency posts view
 * Create Teams functionality
+
+=== March 24th, 2016 (Lab 5)
+
+Completed
+* Search functionality
+* Make profile pages dynamic
+* Create proficiency posts view
+* Restrict URL and routing access based on privileges and sign-in status
+* Create Logo
+
+To be Completed
+* Create UML Diagrams
+* Create games view page
+* Create Teams functionality
+* Handle styling on Proficiencies/Teams/Games
