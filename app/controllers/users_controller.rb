@@ -36,6 +36,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.permission_level = 1
+    @user.slug = @user.username.downcase.gsub(" ", "-")
 
     respond_to do |format|
       if @user.save

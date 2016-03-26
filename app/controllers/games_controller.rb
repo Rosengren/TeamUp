@@ -32,6 +32,7 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
     @game = Game.new(game_params)
+    @game.slug = @game.name.downcase.gsub(" ", "-")
 
     respond_to do |format|
       if @game.save
@@ -71,7 +72,7 @@ class GamesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game
-      @game = Game.find(params[:id])
+      @game = Game.find_by_slug(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
