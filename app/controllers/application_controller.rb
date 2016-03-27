@@ -18,7 +18,10 @@ class ApplicationController < ActionController::Base
 
   # Check if logged in, and if not, then redirect
   def check_if_logged_on
-    if request.path != "/login"
+    #get the current path and verify that the users are logged in, or trying to login/signup
+    controller = params[:controller]
+    action = params[:action]
+    if request.path != "/login" && request.path != "/signup" && !(controller == "users" && action == "create")
       redirect_to :login if @current_user.nil?
     end
   end
