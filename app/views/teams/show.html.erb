@@ -1,29 +1,51 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @team.name %>
-</p>
+<div class="teams-page">
+  <div class="ui container">
+    <div class="ui container profile-header">
+      <h1 class="ui centered huge header"><%= @team.name %></h1>
+      <%= image_tag @team.picture_url, class: "ui centered bordered large circular image", alt: "Team Picture" %>
+      <h2 class="ui centered huge header"><%= game_name %></h2>  
+      <h3 class="ui header">Biography</h3>
+      <p><%= @team.description %></p>
+    </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @team.description %>
-</p>
+    <div class="ui three statistics">
+      <div class="statistic">
+        <div class="value"><%= @team.community_rating %></div>
+        <div class="label">Community Rating</div>
+      </div>
+      <div class="statistic">
+        <div class="value"><%= @team.users.count %></div>
+        <div class="label">Number of Players</div>
+      </div>
+      <div class="statistic">
+        <div class="value"><%= @team.location %></div>
+        <div class="label">Location</div>
+      </div>
+    </div>
 
-<p>
-  <strong>Community rating:</strong>
-  <%= @team.community_rating %>
-</p>
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Location:</strong>
-  <%= @team.location %>
-</p>
-
-<p>
-  <strong>Picture url:</strong>
-  <%= @team.picture_url %>
-</p>
-
-<%= link_to 'Edit', edit_team_path(@team) %> |
-<%= link_to 'Back', teams_path %>
+    <div class="ui section divider"></div>
+    
+    <table class="ui fixed striped table attached">
+      <thead>
+        <tr>
+          <th>Picture</th>
+          <th>Name</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @team.users.each do |user| %>
+            <tr>
+              <td><%= user.picture_url %></td>
+              <td><%= user.username %></td>
+              <td><%= get_role(user.id) %></td>
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

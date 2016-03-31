@@ -6,7 +6,7 @@ $(document).on 'ready page:load', ->
 
   # FIXME: for now click the field name to
   # run the search
-  $('.field').on 'click', ->
+  $('#gamebar').on 'click', ->
     $('.ui.search.selection.dropdown')
       .dropdown({
         apiSettings: {
