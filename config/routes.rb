@@ -73,5 +73,6 @@ Rails.application.routes.draw do
   namespace :search do
     resources :all
     resources :proficiencies
+    resources :games
   end
 end
