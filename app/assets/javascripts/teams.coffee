@@ -4,15 +4,14 @@
 
 $(document).on 'ready page:load', ->
 
-  $('.ui.search.selection.dropdown')
-    .dropdown({
-      apiSettings: {
-        action: 'search games'
-      }
-    })
+  # FIXME: for now click the field name to
+  # run the search
+  $('.field').on 'click', ->
+    $('.ui.search.selection.dropdown')
+      .dropdown({
+        apiSettings: {
+          action: 'search games'
+        }
+      })
 
-  # FIXME: somehow causes the above to 
-  # execute correctly.
-  $('.ui.search.selection.dropdown') ->
-    console.log("HOPE")
 
