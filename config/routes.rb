@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  resources :games_users
-  resources :user_proficiencies
+  resources :games_users, only: [:create, :destroy]
+  resources :user_proficiencies, only: [:create, :destroy]
   resources :teams
   resources :users
-  resources :games do
+  resources :games, only: [:create, :show, :destroy] do
     resources :proficiencies, except: :index do
-      resources :proficiency_posts, only: [:create]
+      resources :proficiency_posts, only: [:create, :destroy]
     end
   end
 
@@ -21,7 +21,10 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
 
-  get 'signup' => 'users#new'
+  get    'admin'   => 'pages#admin'
+  get    'signup'  => 'users#new'
+
+  post   'admin'   => 'pages#create'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
