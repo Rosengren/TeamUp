@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160326214310) do
+ActiveRecord::Schema.define(version: 20160331180558) do
 
   create_table "games", force: :cascade do |t|
     t.string   "name"
@@ -50,8 +50,9 @@ ActiveRecord::Schema.define(version: 20160326214310) do
     t.datetime "date"
     t.text     "content"
     t.integer  "proficiency_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "slug"
   end
 
   add_index "proficiency_posts", ["proficiency_id"], name: "index_proficiency_posts_on_proficiency_id"
@@ -85,8 +86,10 @@ ActiveRecord::Schema.define(version: 20160326214310) do
     t.string   "role"
     t.integer  "user_id"
     t.integer  "team_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "status"
+    t.string   "requestMessage"
   end
 
   add_index "user_teams", ["team_id"], name: "index_user_teams_on_team_id"
