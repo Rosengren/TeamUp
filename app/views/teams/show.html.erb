@@ -38,7 +38,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @team.users.each do |user| %>
+        <% team_members.each do |user| %>
             <tr>
               <td><%= image_tag user.picture_url, class: "ui centered bordered tiny image", alt: user.username %></td>
               <td><%= user.username %></td>
@@ -49,34 +49,71 @@
     </table>
 
    <div class="ui section divider"></div>
-   <button class="fluid ui green massive button" id="requestToJoin">Request to Join</button>
+
+   <% if !is_user_on_team? %>
+     <div class="ui section divider"></div>
+     <button class="fluid ui green massive button" id="requestToJoin">Request to Join</button>
+   <% else %>
+     <table class="ui fixed striped table attached">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Message</th>
+          <th>Decision</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% get_pending_requests.each do |request| %>
+            <tr>
+              <td><%= request.user.username %></td>
+              <td><%= request.role %></td>
+              <td><%= request.requestMessage %></td>
+              <td>
+                <%= button_to 'Approve', request_decision_path(user_id: request.user.id, decision: true), method: :post  %>
+                <%= button_to 'Reject', request_decision_path(user_id: request.user.id, decision: false), method: :post  %>                
+<div class="ui positive button">
+                  Approve
+                </div>
+                <div class="ui negative button">
+                  Reject
+                </div>
+              </td>
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+   <% end %>
   </div>
 </div>
 
-<div class="ui small request join modal">
-    <div class="header">
-      Request to Join
-    </div>
-    <div class="content">
-      <%= form_tag(class: 'ui request join form', id: 'requestJoinForm') do %>
-        <div class="field">
-          <%= label_tag(:role) %><br>
-          <%= text_field_tag(:role) %>
-        </div>
-
-        <div class="field">
-          <%= label_tag('Message') %><br>
-          <%= text_area_tag(:message) %>
-        </div>
-
-        <div class="ui error message"></div>
-
-      <% end %>
-    </div>
-    <div class="actions">
-      <div class="ui negative button">
-        Cancel
+<% if !is_user_on_team? %>
+  <div class="ui small request join modal">
+      <div class="header">
+        Request to Join
       </div>
-      <input type="submit" value="submit" form="requestToJoinForm" class="ui positive button">
-    </div>
-</div>
+      <div class="content">
+        <%= form_tag('/teams/acdc/joinRequest', :class => 'ui request join form') do %>
+          <div class="field">
+            <%= label_tag(:role) %><br>
+            <%= text_field_tag(:role, nil, class: 'ui form') %>
+          </div>
+
+          <div class="field">
+            <%= label_tag('Message') %><br>
+            <%= text_area_tag(:message) %>
+          </div>
+
+          <div class="ui error message"></div>
+          <%= submit_tag("Submit", class: 'ui positive button') %>
+        <% end %>
+      </div>
+      <div class="actions">
+        <div class="ui negative button">
+          Cancel
+        </div>
+      </div>
+  </div>
+<% end %>
+
+<div id="team_name" style="display: none;"><%= @team.name %></div>

@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
-  helper_method :game_name, :get_role
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :requestDecision]
+  helper_method :game_name, :get_role, :is_user_on_team?, :get_pending_requests, :team_members
 
   # GET /teams
   # GET /teams.json
@@ -18,6 +18,26 @@ class TeamsController < ApplicationController
     end
   end
 
+  def requestDecision
+
+    decision = @team.user_teams.find_by(user_id: params[:user_id])
+    if params[:decision] == 'true'
+      decision.status = 1
+    else
+     decision.destroy
+    end
+
+    respond_to do |format|
+      if decision.save
+        format.html { redirect_to @team, notice: 'Decisions have been made.' }
+        format.json { render :show, status: :ok, location: @team }
+      else
+        format.html { render :edit }
+        format.json { render json: @team.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # GET /teams/new
   def new
     @team = Team.new
@@ -25,27 +45,31 @@ class TeamsController < ApplicationController
   end
 
   # GET /teams/1/edit
-  def edit
+  def editfind_by_slug
   end
 
   # POST /teams/1/joinRequest
   def joinRequest
     @team = Team.find_by_slug(params[:id])
-    puts @team
-    puts "some identifiable string"
-    @team.users.push(User.find(session[:session_key]))
-    @team.save
-    user_teams = @team.user_teams.find_by(user_id: session[:session_key])
-    user_teams.status = 0
-    user_teams.role = params[:role]
-    user_teams.message = params[:message]
 
-    if user_teams.save
-      format.html { redirect_to @team, notice: 'Request was successfully sent.' }
-      format.json { render :show, status: :created, location: @team }
-    else
-      format.html { render :show }
-      format.json { render json: @team.errors, status: :unprocessable_entity }
+    begin
+      @team.users.push(User.find(session[:session_key]))
+    rescue
+    end
+
+    respond_to do |format|
+      if @team.save
+        user_teams = @team.user_teams.find_by(user_id: session[:session_key])
+        user_teams.status = 0
+        user_teams.role = params[:role]
+        user_teams.requestMessage = params[:message]
+        user_teams.save
+        format.html { redirect_to @team, notice: 'Request was successfully sent.' }
+        format.json { render :show, status: :created, location: @team }
+      else
+        format.html { render :show }
+        format.json { render json: @team.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -77,7 +101,7 @@ class TeamsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /teams/1
+  # PATCH/PUT /teams/1find_by_slug
   # PATCH/PUT /teams/1.json
   def update
     respond_to do |format|
@@ -92,7 +116,7 @@ class TeamsController < ApplicationController
   end
 
   # DELETE /teams/1
-  # DELETE /teams/1.json
+  # DELETE /teams/1.json    def set_team
   def destroy
     @team.destroy
     respond_to do |format|
@@ -107,6 +131,27 @@ class TeamsController < ApplicationController
 
   def get_role (user_id)
     @team.user_teams.find_by(user_id: user_id).role
+  end
+
+  def is_user_on_team?
+    userOnTeam = @team.user_teams.find_by(user_id: session[:session_key])
+    if userOnTeam != nil and userOnTeam.status == 1
+      true
+    else
+      false
+    end
+  end
+    
+  def get_pending_requests
+    @team.user_teams.where(status: 0)
+  end
+
+  def team_members
+    team_members = []
+    @team.user_teams.where(status: 1).each do |userTeam|
+      team_members.push(User.find(userTeam.user_id))
+    end
+    team_members
   end
 
   private

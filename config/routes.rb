@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   get 'signup' => 'users#new'
 
+  post 'teams/:id/requestDecision' => 'teams#requestDecision', as: :request_decision
   post 'teams/:id/joinRequest' => 'teams#joinRequest'
 
   # Example of regular route:
