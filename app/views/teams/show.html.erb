@@ -47,5 +47,36 @@
         <% end %>
       </tbody>
     </table>
+
+   <div class="ui section divider"></div>
+   <button class="fluid ui green massive button" id="requestToJoin">Request to Join</button>
   </div>
+</div>
+
+<div class="ui small request join modal">
+    <div class="header">
+      Request to Join
+    </div>
+    <div class="content">
+      <%= form_tag(class: 'ui request join form', id: 'requestJoinForm') do %>
+        <div class="field">
+          <%= label_tag(:role) %><br>
+          <%= text_field_tag(:role) %>
+        </div>
+
+        <div class="field">
+          <%= label_tag('Message') %><br>
+          <%= text_area_tag(:message) %>
+        </div>
+
+        <div class="ui error message"></div>
+
+      <% end %>
+    </div>
+    <div class="actions">
+      <div class="ui negative button">
+        Cancel
+      </div>
+      <input type="submit" value="submit" form="requestToJoinForm" class="ui positive button">
+    </div>
 </div>

@@ -28,6 +28,27 @@ class TeamsController < ApplicationController
   def edit
   end
 
+  # POST /teams/1/joinRequest
+  def joinRequest
+    @team = Team.find_by_slug(params[:id])
+    puts @team
+    puts "some identifiable string"
+    @team.users.push(User.find(session[:session_key]))
+    @team.save
+    user_teams = @team.user_teams.find_by(user_id: session[:session_key])
+    user_teams.status = 0
+    user_teams.role = params[:role]
+    user_teams.message = params[:message]
+
+    if user_teams.save
+      format.html { redirect_to @team, notice: 'Request was successfully sent.' }
+      format.json { render :show, status: :created, location: @team }
+    else
+      format.html { render :show }
+      format.json { render json: @team.errors, status: :unprocessable_entity }
+    end
+  end
+
   # POST /teams
   # POST /teams.json
   def create
@@ -40,14 +61,12 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.save
-
-        # add role
-        
         @team.users.push(@user)
 	@team.users
         @team.save
         user_teams = @team.user_teams.find_by(user_id: @user.id)
 	user_teams.role = params[:role]
+        user_teams.status = 1
         user_teams.save!
         format.html { redirect_to @team, notice: 'Team was successfully created.' }
         format.json { render :show, status: :created, location: @team }

@@ -4,6 +4,10 @@
 
 $(document).on 'ready page:load', ->
 
+  $('#requestToJoin').on 'click', ->
+    $('.small.request.join.modal')
+      .modal('show');
+
   # FIXME: for now click the field name to
   # run the search
   $('#gamebar').on 'click', ->

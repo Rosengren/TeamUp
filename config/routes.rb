@@ -22,6 +22,9 @@ Rails.application.routes.draw do
   delete 'logout'  => 'sessions#destroy'
 
   get 'signup' => 'users#new'
+
+  post 'teams/:id/joinRequest' => 'teams#joinRequest'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
