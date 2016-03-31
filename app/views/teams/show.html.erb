@@ -40,7 +40,7 @@
       <tbody>
         <% @team.users.each do |user| %>
             <tr>
-              <td><%= user.picture_url %></td>
+              <td><%= image_tag user.picture_url, class: "ui centered bordered tiny image", alt: user.username %></td>
               <td><%= user.username %></td>
               <td><%= get_role(user.id) %></td>
             </tr>
