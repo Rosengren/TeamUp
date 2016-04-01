@@ -1,29 +1,126 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @team.name %>
-</p>
+<div class="teams-page">
+  <div class="ui container">
+    <div class="ui container profile-header">
+      <h1 class="ui centered huge header"><%= @team.name %></h1>
+      <%= image_tag @team.picture_url, class: "ui centered bordered large circular image", alt: "Team Picture" %>
+      <h2 class="ui centered huge header"><%= game_name %></h2>
+      <h3 class="ui header">Biography</h3>
+      <p><%= @team.description %></p>
+    </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @team.description %>
-</p>
+    <div class="ui three statistics">
+      <div class="statistic">
+        <div class="value"><%= @team.community_rating %></div>
+        <div class="label">Community Rating</div>
+      </div>
+      <div class="statistic">
+        <div class="value"><%= @team.users.count %></div>
+        <div class="label">Number of Players</div>
+      </div>
+      <div class="statistic">
+        <div class="value"><%= @team.location %></div>
+        <div class="label">Location</div>
+      </div>
+    </div>
 
-<p>
-  <strong>Community rating:</strong>
-  <%= @team.community_rating %>
-</p>
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Location:</strong>
-  <%= @team.location %>
-</p>
+    <div class="ui section divider"></div>
 
-<p>
-  <strong>Picture url:</strong>
-  <%= @team.picture_url %>
-</p>
+    <table class="ui fixed striped table attached">
+      <thead>
+        <tr>
+          <th>Picture</th>
+          <th>Name</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% team_members.each do |user| %>
+            <tr>
+              <td><%= image_tag user.picture_url, class: "ui centered bordered tiny image", alt: user.username %></td>
+              <td><%= user.username %></td>
+              <td><%= get_role(user.id) %></td>
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<%= link_to 'Edit', edit_team_path(@team) %> |
-<%= link_to 'Back', teams_path %>
+   <% if !is_user_on_team? %>
+     <div class="ui section divider"></div>
+     <button class="fluid ui green massive button" id="requestToJoin">Request to Join</button>
+   <% elsif pending_join_requests? %>
+     <div class="ui section divider"></div>
+     <h2 class="header">Pending Requests</h2>
+     <table class="ui fixed striped table attached">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Message</th>
+          <th>Decision</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% get_pending_requests.each do |request| %>
+            <tr>
+              <td><%= request.user.username %></td>
+              <td><%= request.role %></td>
+              <td><%= request.requestMessage %></td>
+              <td>
+                <div class="ui grid centered">
+                  <div class="seven wide column">
+                <%= button_to 'Approve', request_decision_path(user_id: request.user.id, decision: true),
+                      method: :post, class: 'ui positive button' %>
+                    </div>
+                    <div class="seven wide column">
+                <%= button_to 'Reject', request_decision_path(user_id: request.user.id, decision: false),
+                      method: :post, class: 'ui negative button'  %>
+                    </div>
+                  </div>
+              </td>
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+   <% end %>
+  </div>
+</div>
+
+<% if !is_user_on_team? %>
+  <div class="ui small request join modal">
+      <div class="header">
+        Request to Join
+      </div>
+      <div class="content">
+        <%= form_for(@user_team, :html => {:class => 'ui request join form', id: 'requestToJoinForm'}) do |f| %>
+
+          <div class="field">
+            <%= f.label 'Role' %>
+            <%= f.text_field :role %>
+          </div>
+
+          <div class="field">
+            <%= f.label 'Message' %>
+            <%= f.text_area :requestMessage %>
+          </div>
+
+          <%= f.hidden_field :user_id, :value => current_user.id %>
+          <%= f.hidden_field :team_id, :value => @team.id %>
+
+          <div class="ui error message"></div>
+        <% end %>
+      </div>
+      <div class="actions">
+        <div class="ui negative button">
+          Cancel
+        </div>
+
+        <input type="submit" value="submit" form="requestToJoinForm" class="ui positive button">
+      </div>
+  </div>
+<% end %>
+
+<div id="team_name" style="display: none;"><%= @team.name %></div>

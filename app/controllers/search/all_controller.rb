@@ -7,6 +7,7 @@ class Search::AllController < ApplicationController
     users = FuzzyMatch.new(User.all, :read => :username)
     games = FuzzyMatch.new(Game.all, :read => :name)
     profs = FuzzyMatch.new(Proficiency.all, :read => :name)
+    teams = FuzzyMatch.new(Team.all, :read => :name)
 
     results = []
     users.find_all(params[:q]).each do |user|
@@ -14,7 +15,7 @@ class Search::AllController < ApplicationController
         category: 'Users',
         id: user.id,
         name: user.username,
-        url: "/users/" + user.id.to_s
+        url: "/users/" + user.username.downcase
       })
     end
 
@@ -23,7 +24,7 @@ class Search::AllController < ApplicationController
         category: 'Games',
         id: game.id,
         name: game.name,
-        url: '/games/' + game.id.to_s
+        url: '/games/' + game.name.tr(' ', '-').downcase
       })
     end
 
@@ -32,11 +33,19 @@ class Search::AllController < ApplicationController
         category: 'Proficiencies',
         id: proficiency.id,
         name: proficiency.name,
-        url: '/proficiencies/' + proficiency.id.to_s
+        url: '/games/' + proficiency.game.name.tr(' ', '-').downcase + '/proficiencies/' + proficiency.name.downcase
+      })
+    end
+
+    teams.find_all(params[:q]).each do |team|
+      results.push({
+        category: 'Teams',
+        id: team.id,
+        name: team.name,
+        url: '/teams/' + team.name.tr(' ', '-').downcase
       })
     end
 
     render :json => results
   end
 end
-

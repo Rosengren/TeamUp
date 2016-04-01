@@ -11,17 +11,27 @@
     </div>
   <% end %>
 
+  <div class="field" id="gamebar">
+    <label>Game</label>
+    <div class="ui search selection dropdown">
+      <%= f.hidden_field :game_id %>
+      <i class="dropdown icon"></i>
+      <input type="text" class="search" tabindex="0">
+      <div class="default text">Select one...</div>
+    </div>
+  </div>
+
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= label_tag(:role, "Role") %><br>
+    <%= text_field_tag(:role) %>
   </div>
   <div class="field">
-    <%= f.label :community_rating %><br>
-    <%= f.number_field :community_rating %>
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
   </div>
   <div class="field">
     <%= f.label :location %><br>

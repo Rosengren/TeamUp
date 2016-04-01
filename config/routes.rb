@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :user_proficiencies, only: [:create, :destroy]
   resources :teams
   resources :users
+  resources :user_teams
   resources :games, only: [:create, :show, :destroy] do
     resources :proficiencies, except: :index do
       resources :proficiency_posts, only: [:create, :destroy]
@@ -21,10 +22,11 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
 
-  get    'admin'   => 'pages#admin'
-  get    'signup'  => 'users#new'
+  post 'teams/:id/requestDecision' => 'teams#requestDecision', as: :request_decision
 
+  get    'admin'   => 'pages#admin'
   post   'admin'   => 'pages#create'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
@@ -76,5 +78,6 @@ Rails.application.routes.draw do
   namespace :search do
     resources :all
     resources :proficiencies
+    resources :games
   end
 end
