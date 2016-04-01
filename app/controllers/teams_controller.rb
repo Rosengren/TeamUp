@@ -68,6 +68,9 @@ class TeamsController < ApplicationController
         user_teams.role = params[:role]
         user_teams.status = 1
         user_teams.save!
+
+        # TODO: Add game to user profile if it's not already there
+
         format.html { redirect_to @team, notice: 'Team was successfully created.' }
         format.json { render :show, status: :created, location: @team }
       else

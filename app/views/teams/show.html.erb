@@ -52,6 +52,8 @@
      <div class="ui section divider"></div>
      <button class="fluid ui green massive button" id="requestToJoin">Request to Join</button>
    <% elsif pending_join_requests? %>
+     <div class="ui section divider"></div>
+     <h2 class="header">Pending Requests</h2>
      <table class="ui fixed striped table attached">
       <thead>
         <tr>
@@ -68,14 +70,16 @@
               <td><%= request.role %></td>
               <td><%= request.requestMessage %></td>
               <td>
-                <%= button_to 'Approve', request_decision_path(user_id: request.user.id, decision: true), method: :post  %>
-                <%= button_to 'Reject', request_decision_path(user_id: request.user.id, decision: false), method: :post  %>
-<div class="ui positive button">
-                  Approve
-                </div>
-                <div class="ui negative button">
-                  Reject
-                </div>
+                <div class="ui grid centered">
+                  <div class="seven wide column">
+                <%= button_to 'Approve', request_decision_path(user_id: request.user.id, decision: true),
+                      method: :post, class: 'ui positive button' %>
+                    </div>
+                    <div class="seven wide column">
+                <%= button_to 'Reject', request_decision_path(user_id: request.user.id, decision: false),
+                      method: :post, class: 'ui negative button'  %>
+                    </div>
+                  </div>
               </td>
             </tr>
         <% end %>

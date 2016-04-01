@@ -8,7 +8,12 @@
         <%= image_tag game.picture_url, class: 'ui small left floated image' %>
       </div>
       <div class="thirteen wide column">
-        <p><strong>Team:</strong>  LSM_gaming</p>
+        <strong>Teams:</strong>
+          <div class="ui list">
+          <% get_teams_for_game(game.id).each do |team| %>
+            <div class="item"><%= link_to team.name, '/teams/' + team.name.downcase.tr(' ', '-')  %></div>
+          <% end %>
+        </div>
         <strong>Game Description:</strong>
         <p><%= game.description %></p>
       </div>

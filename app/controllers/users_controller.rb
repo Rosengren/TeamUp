@@ -3,7 +3,7 @@ class UsersController < ApplicationController
       only: [:show, :edit, :update, :destroy]
   helper_method :is_current_user?, :proficiencies_for_game, :get_list_of_games,
       :endorsements_for_proficiency, :number_of_games, :number_of_proficiencies,
-      :user_rating
+      :user_rating, :get_teams_for_game
 
   # GET /users
   # GET /users.json
@@ -112,6 +112,10 @@ class UsersController < ApplicationController
   def user_rating
     # TODO: implement ratings
     12
+  end
+
+  def get_teams_for_game(id)
+    @user.teams.where(game_id: id)
   end
 
   private
