@@ -3,8 +3,8 @@ class PagesController < ApplicationController
 
   # setup all the new ActiveRecord objects that can be added
   def admin
-    @game = @game.nil? ? Game.new : @game
-    @proficiency = @proficiency.nil? ? Proficiency.new : @proficiency
+    @game ||= Game.new
+    @proficiency ||= Proficiency.new
   end
 
   # create the game
