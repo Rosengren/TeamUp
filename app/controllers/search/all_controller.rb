@@ -24,7 +24,7 @@ class Search::AllController < ApplicationController
         category: 'Games',
         id: game.id,
         name: game.name,
-        url: '/games/' + game.id.to_s
+        url: '/games/' + game.name.tr(' ', '-').downcase
       })
     end
 
@@ -33,7 +33,7 @@ class Search::AllController < ApplicationController
         category: 'Proficiencies',
         id: proficiency.id,
         name: proficiency.name,
-        url: '/proficiencies/' + proficiency.id.to_s
+        url: '/games/' + proficiency.game.name.tr(' ', '-').downcase + '/proficiencies/' + proficiency.name.downcase
       })
     end
 
@@ -49,4 +49,3 @@ class Search::AllController < ApplicationController
     render :json => results
   end
 end
-
