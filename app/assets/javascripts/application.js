@@ -19,8 +19,7 @@ $(document).ready(function() {
   $.fn.api.settings.api = {
     'search' : '/search/all?q={query}',
     'search proficiencies' : '/search/proficiencies?game={id}&q={query}',
-    'search games' : '/search/games?q={query}',
-    'submit join request' : '/teams/{query}/joinRequest'
+    'search games' : '/search/games?q={query}'
   };
 });
 

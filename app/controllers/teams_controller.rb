@@ -46,7 +46,7 @@ class TeamsController < ApplicationController
   end
 
   # GET /teams/1/edit
-  def editfind_by_slug
+  def edit
   end
 
   # POST /teams
@@ -80,7 +80,7 @@ class TeamsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /teams/1find_by_slug
+  # PATCH/PUT /teams/1
   # PATCH/PUT /teams/1.json
   def update
     respond_to do |format|
@@ -95,7 +95,7 @@ class TeamsController < ApplicationController
   end
 
   # DELETE /teams/1
-  # DELETE /teams/1.json    def set_team
+  # DELETE /teams/1.json
   def destroy
     @team.destroy
     respond_to do |format|

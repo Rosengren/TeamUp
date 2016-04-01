@@ -4,6 +4,7 @@ class Team < ActiveRecord::Base
   has_many :users, through: :user_teams
 
   validates_presence_of :slug
+
   def to_param
     slug
   end
