@@ -32,6 +32,10 @@
               <%= link_to current_user.username, current_user, class: 'item' %>
               <%= link_to "New Team", new_team_path, class: 'item' %>
               <%= link_to 'Settings', edit_user_path(current_user), class: 'item' %>
+              <% if is_admin? %>
+                <%= link_to 'Admin Panel', admin_path, class: 'item' %>
+              <% end %>
+
               <%= link_to "Log out", logout_path, method: "delete", class: 'item' %>
             </div>
           </div>

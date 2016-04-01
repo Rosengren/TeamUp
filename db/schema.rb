@@ -17,9 +17,9 @@ ActiveRecord::Schema.define(version: 20160331180558) do
     t.string   "name"
     t.text     "description"
     t.text     "picture_url"
+    t.string   "slug"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "slug"
   end
 
   create_table "games_users", force: :cascade do |t|
@@ -34,15 +34,13 @@ ActiveRecord::Schema.define(version: 20160331180558) do
     t.string   "name"
     t.text     "description"
     t.text     "picture_url"
+    t.string   "slug"
     t.integer  "game_id"
-    t.integer  "users_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "slug"
   end
 
   add_index "proficiencies", ["game_id"], name: "index_proficiencies_on_game_id"
-  add_index "proficiencies", ["users_id"], name: "index_proficiencies_on_users_id"
 
   create_table "proficiency_posts", force: :cascade do |t|
     t.string   "title"
@@ -50,9 +48,9 @@ ActiveRecord::Schema.define(version: 20160331180558) do
     t.datetime "date"
     t.text     "content"
     t.integer  "proficiency_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
     t.string   "slug"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_index "proficiency_posts", ["proficiency_id"], name: "index_proficiency_posts_on_proficiency_id"
@@ -63,10 +61,10 @@ ActiveRecord::Schema.define(version: 20160331180558) do
     t.integer  "community_rating"
     t.string   "location"
     t.text     "picture_url"
+    t.string   "slug"
     t.integer  "game_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.string   "slug"
   end
 
   add_index "teams", ["game_id"], name: "index_teams_on_game_id"
@@ -101,9 +99,9 @@ ActiveRecord::Schema.define(version: 20160331180558) do
     t.text     "picture_url"
     t.integer  "permission_level"
     t.string   "password_digest"
+    t.string   "slug"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.string   "slug"
   end
 
   add_index "users", ["username"], name: "index_users_on_username", unique: true

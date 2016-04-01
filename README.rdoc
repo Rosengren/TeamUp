@@ -101,3 +101,17 @@ To be Completed
 * Create Teams functionality
 * Handle styling on Proficiencies/Teams/Games
 * Add Admin Functionality
+
+=== March 31st, 2016 (Lab 6)
+
+Completed
+* Admin Console (part 1)
+* Created Teams functionality
+* Added Profile Functionality
+* Edit Profile fixed
+
+To be Completed
+* Create UML Diagrams
+* Create games view page
+* Handle styling on Proficiencies/Teams/Games
+* Add Admin Functionality (part 2)
