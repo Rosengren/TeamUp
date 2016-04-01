@@ -42,7 +42,7 @@ class Search::AllController < ApplicationController
         category: 'Teams',
         id: team.id,
         name: team.name,
-        url: '/teams/' + team.name.downcase
+        url: '/teams/' + team.name.tr(' ', '-').downcase
       })
     end
 

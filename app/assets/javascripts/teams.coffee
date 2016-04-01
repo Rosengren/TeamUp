@@ -4,9 +4,41 @@
 
 $(document).on 'ready page:load', ->
 
+  $('.small.request.join.modal')
+    .modal({
+      onApprove : ->
+        return false
+    })
+
   $('#requestToJoin').on 'click', ->
     $('.small.request.join.modal')
       .modal('show');
+
+  $('.ui.request.join.form')
+    .form({
+      on: 'change',
+      fields: {
+        user_team_role : {
+          identifier: 'user_team_role',
+          rules: [
+            {
+              type    : 'empty',
+              prompt  : 'Please specify a role.'
+            }
+          ]
+        },
+        user_team_requestMessage : {
+          identifier : 'user_team_requestMessage',
+          rules: [
+            {
+              type    : 'empty',
+              prompt  : 'Please add a message.'
+            }
+          ]
+        }
+      }
+    })
+
 
   # FIXME: for now click the field name to
   # run the search
@@ -17,5 +49,3 @@ $(document).on 'ready page:load', ->
           action: 'search games'
         }
       })
-
-

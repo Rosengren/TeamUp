@@ -25,16 +25,10 @@ class UserTeamsController < ApplicationController
   # POST /user_teams.json
   def create
     @user_team = UserTeam.new(user_team_params)
-
-    respond_to do |format|
-      if @user_team.save
-        format.html { redirect_to @user_team, notice: 'User team was successfully created.' }
-        format.json { render :show, status: :created, location: @user_team }
-      else
-        format.html { render :new }
-        format.json { render json: @user_team.errors, status: :unprocessable_entity }
-      end
-    end
+    @user_team.status = 0
+    @user_team.save
+    # TODO: May want to return a success message
+    redirect_to(:back)
   end
 
   # PATCH/PUT /user_teams/1
@@ -69,6 +63,6 @@ class UserTeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_team_params
-      params.require(:user_team).permit(:role)
+      params.require(:user_team).permit(:role, :requestMessage, :user_id, :team_id)
     end
 end

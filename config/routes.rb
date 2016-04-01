@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :user_proficiencies, only: [:create, :destroy]
   resources :teams
   resources :users
+  resources :user_teams
   resources :games, only: [:create, :show, :destroy] do
     resources :proficiencies, except: :index do
       resources :proficiency_posts, only: [:create, :destroy]
@@ -22,7 +23,6 @@ Rails.application.routes.draw do
   delete 'logout'  => 'sessions#destroy'
 
   post 'teams/:id/requestDecision' => 'teams#requestDecision', as: :request_decision
-  post 'teams/:id/joinRequest' => 'teams#joinRequest'
 
   get    'admin'   => 'pages#admin'
   post   'admin'   => 'pages#create'

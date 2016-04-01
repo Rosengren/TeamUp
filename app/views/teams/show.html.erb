@@ -5,7 +5,7 @@
     <div class="ui container profile-header">
       <h1 class="ui centered huge header"><%= @team.name %></h1>
       <%= image_tag @team.picture_url, class: "ui centered bordered large circular image", alt: "Team Picture" %>
-      <h2 class="ui centered huge header"><%= game_name %></h2>  
+      <h2 class="ui centered huge header"><%= game_name %></h2>
       <h3 class="ui header">Biography</h3>
       <p><%= @team.description %></p>
     </div>
@@ -28,7 +28,7 @@
     <p id="notice"><%= notice %></p>
 
     <div class="ui section divider"></div>
-    
+
     <table class="ui fixed striped table attached">
       <thead>
         <tr>
@@ -48,12 +48,10 @@
       </tbody>
     </table>
 
-   <div class="ui section divider"></div>
-
    <% if !is_user_on_team? %>
      <div class="ui section divider"></div>
      <button class="fluid ui green massive button" id="requestToJoin">Request to Join</button>
-   <% else %>
+   <% elsif pending_join_requests? %>
      <table class="ui fixed striped table attached">
       <thead>
         <tr>
@@ -71,7 +69,7 @@
               <td><%= request.requestMessage %></td>
               <td>
                 <%= button_to 'Approve', request_decision_path(user_id: request.user.id, decision: true), method: :post  %>
-                <%= button_to 'Reject', request_decision_path(user_id: request.user.id, decision: false), method: :post  %>                
+                <%= button_to 'Reject', request_decision_path(user_id: request.user.id, decision: false), method: :post  %>
 <div class="ui positive button">
                   Approve
                 </div>
@@ -93,25 +91,30 @@
         Request to Join
       </div>
       <div class="content">
-        <%= form_tag('/teams/acdc/joinRequest', :class => 'ui request join form') do %>
+        <%= form_for(@user_team, :html => {:class => 'ui request join form', id: 'requestToJoinForm'}) do |f| %>
+
           <div class="field">
-            <%= label_tag(:role) %><br>
-            <%= text_field_tag(:role, nil, class: 'ui form') %>
+            <%= f.label 'Role' %>
+            <%= f.text_field :role %>
           </div>
 
           <div class="field">
-            <%= label_tag('Message') %><br>
-            <%= text_area_tag(:message) %>
+            <%= f.label 'Message' %>
+            <%= f.text_area :requestMessage %>
           </div>
+
+          <%= f.hidden_field :user_id, :value => current_user.id %>
+          <%= f.hidden_field :team_id, :value => @team.id %>
 
           <div class="ui error message"></div>
-          <%= submit_tag("Submit", class: 'ui positive button') %>
         <% end %>
       </div>
       <div class="actions">
         <div class="ui negative button">
           Cancel
         </div>
+
+        <input type="submit" value="submit" form="requestToJoinForm" class="ui positive button">
       </div>
   </div>
 <% end %>
