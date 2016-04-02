@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   before_action :set_user, :set_games_user, :set_user_proficiency,
-      only: [:show, :edit, :update, :destroy]
+      only: [:show, :edit, :update, :destroy, :endorse]
   helper_method :is_current_user?, :proficiencies_for_game, :get_list_of_games,
       :endorsements_for_proficiency, :number_of_games, :number_of_proficiencies,
-      :user_rating, :get_teams_for_game
+      :user_rating, :get_teams_for_game, :endorsed?
 
   # GET /users
   # GET /users.json
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
   end
 
   # DELETE /users/1
-  # DELETE /users/1.json
+  # DELETE /users/1.juserson
   def destroy
     @user.destroy
     respond_to do |format|
@@ -92,9 +92,12 @@ class UsersController < ApplicationController
     @user.proficiencies.where game_id: game.id
   end
 
-  def endorsements_for_proficiency(proficiency)
-    # TODO: implement this once endorsements had been added
-    "List of endorsements"
+  def endorsements_for_proficiency(proficiency_id)
+    endorserObjects = []
+    get_endorsements(proficiency_id).each do |endorser|
+      endorserObjects.push(User.find_by(username: endorser))
+    end 
+    endorserObjects
   end
 
   def get_list_of_games
@@ -114,6 +117,25 @@ class UsersController < ApplicationController
     12
   end
 
+  def endorsed?(proficiency_id)
+    if endorsers = get_endorsements(proficiency_id)
+      return endorsers.include? current_user.username
+    end
+    false
+  end
+
+  def endorse
+    if proficiency = @user.user_proficiencies.find_by(proficiency_id: params[:proficiency_id])
+      if proficiency.endorsements
+        proficiency.endorsements += ',' + current_user.username
+      else
+        proficiency.endorsements = current_user.username
+      end
+      proficiency.save
+    end
+    redirect_to(:back)
+  end
+
   def get_teams_for_game(id)
     @user.teams.where(game_id: id)
   end
@@ -121,7 +143,7 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find_by_slug(params[:id])
+      @user = User.find_by_slug(params[:id].downcase)
       if @user.picture_url.blank?
         # add default image
         @user.picture_url = 'https://s-media-cache-ak0.pinimg.com/736x/dd/11/1f/dd111ff5042dc332fef3e297df41ea75.jpg'
@@ -134,6 +156,15 @@ class UsersController < ApplicationController
 
     def set_user_proficiency
       @user_proficiency = UserProficiency.new
+    end
+
+    def get_endorsements(proficiency_id)
+      if proficiency = @user.user_proficiencies.find_by(proficiency_id: proficiency_id)
+        if endorsers = proficiency.endorsements
+          return endorsers.split(',')
+        end
+      end
+      []
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
