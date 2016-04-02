@@ -66,10 +66,10 @@ class ProficienciesController < ApplicationController
   end
 
   def get_profile_picture(username)
-    if user = User.find_by_slug(username)
+    if user = User.find_by_slug(username.downcase)
       return user.picture_url
     end
-    ""
+    "http://i.istockimg.com/file_thumbview_approve/64396363/3/stock-photo-64396363-businessman-silhouette-as-avatar-or-default-profile-picture.jpg"
   end
 
   private
