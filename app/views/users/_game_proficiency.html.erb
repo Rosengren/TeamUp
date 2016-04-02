@@ -34,7 +34,7 @@
     <tbody>
       <% proficiencies_for_game(game).each do |proficiency| %>
       <tr>
-        <td><%= proficiency.name %></td>
+        <td><%= link_to proficiency.name, '/games/' + game.name.downcase.tr(' ', '-') + '/proficiencies/' + proficiency.name.downcase %></td>
         <td><%= proficiency.description %></td>
         <td>
           <% endorsements_for_proficiency(proficiency.id).each do |endorser| %>
