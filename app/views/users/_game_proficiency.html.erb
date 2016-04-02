@@ -34,7 +34,14 @@
           <tr>
             <td><%= proficiency.name %></td>
             <td><%= proficiency.description %></td>
-            <td><%= endorsements_for_proficiency(proficiency) %></td>
+            <td>
+            <% endorsements_for_proficiency(proficiency.id).each do |endorser| %>
+              <%= image_tag endorser.picture_url, class: 'ui mini left floated image' %>
+	    <% end %>
+            <% if !endorsed?(proficiency.id) %>
+            <%= button_to 'Endorse', endorse_path(@user.username, proficiency.id), method: :post, class: 'ui positive button' %>
+            <% end %>
+            </td>
           </tr>
       <% end %>
     </tbody>

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   delete 'logout'  => 'sessions#destroy'
 
   post 'teams/:id/requestDecision' => 'teams#requestDecision', as: :request_decision
+  post 'users/:id/endorse/:proficiency_id' => 'users#endorse', as: :endorse
 
   get    'admin'   => 'pages#admin'
   post   'admin'   => 'pages#create'
