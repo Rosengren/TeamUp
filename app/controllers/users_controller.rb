@@ -114,7 +114,7 @@ class UsersController < ApplicationController
   end
 
   def number_of_proficiencies
-    @user.games.inject(0){ |sum, game| sum += game.proficiencies.count }
+    @user.user_proficiencies.count
   end
 
   def user_rating
