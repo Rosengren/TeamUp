@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :set_game, :set_proficiencies, only: [:show, :edit, :update, :destroy]
+  helper_method :proficiency_link
 
   # GET /games
   # GET /games.json
@@ -69,10 +70,18 @@ class GamesController < ApplicationController
     end
   end
 
+  def proficiency_link(proficiency)
+     '/games/' + @game.name.downcase.tr(' ', '-') + '/proficiencies/' + proficiency.downcase.tr(' ', '-')
+   end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game
       @game = Game.find_by_slug(params[:id])
+    end
+
+    def set_proficiencies
+      @proficiencies = @game.proficiencies
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
