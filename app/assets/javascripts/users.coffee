@@ -120,5 +120,8 @@ $(document).on 'ready page:load', ->
       }
     })
 
+  $('.ui[data-title]')
+    .popup()
+
   $('.message .close').on 'click', ->
     $(this).closest('.message').transition('fade')

@@ -11,9 +11,9 @@
       </div>
       <div class="thirteen wide column">
         <strong>Teams:</strong>
-          <div class="ui list">
+        <div class="ui list">
           <% get_teams_for_game(game.id).each do |team| %>
-            <div class="item"><%= link_to team.name, '/teams/' + team.name.downcase.tr(' ', '-')  %></div>
+          <div class="item"><%= link_to team.name, '/teams/' + team.name.downcase.tr(' ', '-')  %></div>
           <% end %>
         </div>
         <strong>Game Description:</strong>
@@ -33,23 +33,23 @@
     </thead>
     <tbody>
       <% proficiencies_for_game(game).each do |proficiency| %>
-          <tr>
-            <td><%= proficiency.name %></td>
-            <td><%= proficiency.description %></td>
-            <td>
-            <% endorsements_for_proficiency(proficiency.id).each do |endorser| %>
-              <%= image_tag endorser.picture_url, class: 'ui mini left floated image' %>
-	    <% end %>
-            <% if !endorsed?(proficiency.id) %>
+      <tr>
+        <td><%= proficiency.name %></td>
+        <td><%= proficiency.description %></td>
+        <td>
+          <% endorsements_for_proficiency(proficiency.id).each do |endorser| %>
+            <%= link_to(image_tag(endorser.picture_url, class: 'ui avatar image', data: {title: endorser.username}), user_path(endorser)) %>
+          <% end %>
+          <% if !endorsed?(proficiency.id) %>
             <%= button_to 'Endorse', endorse_path(@user.username, proficiency.id), method: :post, class: 'ui positive button' %>
-            <% end %>
-            </td>
-          </tr>
+          <% end %>
+        </td>
+      </tr>
       <% end %>
     </tbody>
   </table>
   <% if is_current_user? %>
-    <div class="ui bottom attached blue button add_proficiency_to_user" data="<%= game.id %>">Add Proficiency</div>
+  <div class="ui bottom attached blue button add_proficiency_to_user" data="<%= game.id %>">Add Proficiency</div>
   <% end %>
 </div>
 <% end %>
