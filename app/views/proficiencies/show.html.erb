@@ -1,28 +1,83 @@
-<div class="ui stacked segment padding-top">
-    <h1><%= @game %> - <%= @proficiency.name %></h1> 
+<div class="proficiency-page">
+  <div class="ui container proficiency-header">
+    <h1 class="ui centered huge header"><%= @proficiency.name %></h1>
+    <%= image_tag @proficiency.picture_url, class: "ui centered bordered large circular image", alt: "Proficiency Picture" %>
+    <h1 class="ui centered huge header"><%= @game.name %></h1>
 
-  <div class="field">
-    <%= @proficiency.description %>
+    <h3 class="ui header">Description</h3>
+    <p><%= @proficiency.description %></p>
   </div>
 
-  <img src="<%= @proficiency.picture_url %>" width="100px" height="100px"/>
-  </div>
+  <% if @proficiency_posts.any? %>
+  <div class="ui container">
+    <div class="ui section divider"></div>
 
-  <% if @proficiency_posts != nil %>
+    <h2 class="ui header">Posts</h2>
+
     <div class="ui list">
-      <% @proficiency_posts.each do |proficiency_post| %>
-        <div class="item">
-          <div class="header"><%= proficiency_post.username %> - <%= proficiency_post.title %></div>
-          <div class="meta"><%= proficiency_post.date.to_formatted_s(:long) %></div>
-          <div class="description"><%= proficiency_post.content %></div>
+      <% @proficiency_posts.reverse.each do |proficiency_post| %>
+      <div class="ui segment">
+        <h2 class="ui header">
+          <%= image_tag get_profile_picture(proficiency_post.username), alt: "Profile Picture" %>
+          <div class="content">
+            <%= proficiency_post.title %>
+            <div class="sub header">
+              <%= link_to proficiency_post.username, '/users/' + proficiency_post.username.downcase  %>
+              - <%= proficiency_post.date.to_formatted_s(:long) %></div>
+          </div>
+        </h2>
+        <div class="ui content">
+          <%= proficiency_post.content %>
         </div>
+      </div>
       <% end %>
-    </tbody>
+    </div>
+
+    <div class="ui section divider"></div>
+  </div>
   <% end %>
 
   <% if @permission > 1 %>
-    <%# INSERT THE MODAL HERE %>
-  <% end %>
+  <div class="ui container">
+    <%= form_for(@proficiency_post, :html => {:class => 'ui add proficiency post form', id: 'addProficiencyPostForm'}) do |f| %>
 
-  <br/>
+    <div class="ui segment">
+
+      <h3 class="ui centered aligned header padding-top">Add a Post</h3>
+
+      <% if @game.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>
+
+        <ul>
+          <% @game.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+
+      </div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+      </div>
+
+      <div class="field">
+        <%= f.label :content %>
+        <%= f.text_area :content %>
+      </div>
+
+      <%= f.hidden_field :proficiency_id, :value => @proficiency.id %>
+      <%= f.hidden_field :username, :value => current_user.username %>
+
+      <div class="actions right-align">
+        <%= f.submit 'Submit Post', class: 'ui blue submit button' %>
+      </div>
+
+      <div class="ui error message"></div>
+    </div>
+  </div>
+  <% end %>
+  <% end %>
 </div>

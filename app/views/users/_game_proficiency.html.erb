@@ -1,7 +1,9 @@
 <% @user.games.each do |game| %>
 <div class="ui section divider"></div>
 <div class="ui container">
-  <h2 class="ui header"><%= game.name %></h2>
+  <h2 class="ui header">
+    <%= link_to game.name, '/games/' + game.name.downcase.tr(' ', '-')  %>
+  </h2>
   <div class="ui container">
     <div class="ui two column grid">
       <div class="three wide column middle aligned centered">

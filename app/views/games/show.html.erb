@@ -1,18 +1,30 @@
-<p id="notice"><%= notice %></p>
+<div class="game-page">
+  <div class="ui container game-header">
+    <%= image_tag @game.picture_url, class: "ui centered bordered large circular image", alt: "Game Picture" %>
+    <h1 class="ui centered huge header"><%= @game.name %></h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @game.name %>
-</p>
+    <h3 class="ui header">Description</h3>
+    <p><%= @game.description %></p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @game.description %>
-</p>
-
-<p>
-  <strong>Picture url:</strong>
-  <%= @game.picture_url %>
-</p>
-
-<%= link_to 'Back', games_path %>
+    <h3 class="ui header">Proficiencies</h3>
+    <table class="ui celled striped table">
+      <thead>
+        <tr>
+          <th> </th>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @proficiencies.each do |proficiency| %>
+            <tr>
+              <td class="collapsing"><%= image_tag proficiency.picture_url, class: 'ui small left floated image' %></td>
+              <td>
+                <%= link_to proficiency.name, proficiency_link(proficiency.name)  %>
+              <td><%= proficiency.description %></td>
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

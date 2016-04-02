@@ -72,6 +72,22 @@ $(document).on 'ready page:load', ->
       }
     })
 
+  $('.ui.edit.user.form')
+    .form({
+      on: 'change',
+      fields: {
+        user_picture_url: {
+          identifier: 'user_picture_url',
+          rules: [
+            {
+              type    : 'empty',
+              prompt  : 'Please set a picture url'
+            }
+          ]
+        }
+      }
+    })
+
   $('.ui.add.game.form')
     .form({
       on: 'submit',

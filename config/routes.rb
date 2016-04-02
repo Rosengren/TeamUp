@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :teams
   resources :users
   resources :user_teams
+  resources :proficiency_posts, only: [:create]
   resources :games, only: [:create, :show, :destroy] do
     resources :proficiencies, except: :index do
       resources :proficiency_posts, only: [:create, :destroy]

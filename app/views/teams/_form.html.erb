@@ -1,47 +1,59 @@
-<%= form_for(@team) do |f| %>
+<%= form_for(@team, :html => {:class => 'ui sign up form'}) do |f| %>
   <% if @team.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
+    <div class="ui negative message">
+      <i class="close icon"></i>
+      <div class="header">
+        Could not create team!
+      </div>
 
-      <ul>
-      <% @team.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+      <ul class="list">
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field" id="gamebar">
-    <label>Game</label>
-    <div class="ui search selection dropdown">
-      <%= f.hidden_field :game_id %>
-      <i class="dropdown icon"></i>
-      <input type="text" class="search" tabindex="0">
-      <div class="default text">Select one...</div>
-    </div>
-  </div>
+  <div class="ui stacked segment">
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= label_tag(:role, "Role") %><br>
-    <%= text_field_tag(:role) %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :location %><br>
-    <%= f.text_field :location %>
-  </div>
-  <div class="field">
-    <%= f.label :picture_url %><br>
-    <%= f.text_area :picture_url %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+    <div class="field" id="gamebar">
+      <label>Game</label>
+      <div class="ui search selection dropdown">
+        <%= f.hidden_field :game_id %>
+        <i class="dropdown icon"></i>
+        <input type="text" class="search" tabindex="0">
+        <div class="default text">Select one...</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= label_tag(:role, "Role") %>
+      <%= text_field_tag(:role) %>
+    </div>
+    <div class="field">
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </div>
+    <div class="field">
+      <%= f.label :location %>
+      <div class="ui fluid selection dropdown">
+        <%= f.hidden_field :location %>
+        <i class="dropdown icon"></i>
+        <div class="default text">Select Country</div>
+        <%= render 'list_of_countries' %>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= f.label :picture_url %>
+      <%= f.text_field :picture_url %>
+    </div>
+    <div class="actions right-align">
+      <%= f.submit(:class => 'ui blue submit button', :value => 'Create Team') %>
+    </div>
   </div>
 <% end %>

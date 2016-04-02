@@ -1,7 +1,7 @@
 class TeamsController < ApplicationController
   before_action :set_team, :set_user_team, only: [:show, :edit, :update, :destroy, :requestDecision]
   helper_method :game_name, :get_role, :is_user_on_team?, :get_pending_requests,
-                :team_members, :pending_join_requests?
+                :team_members, :pending_join_requests?, :has_requested_to_join?
 
   # GET /teams
   # GET /teams.json
@@ -56,6 +56,11 @@ class TeamsController < ApplicationController
     @team.slug = @team.name.downcase.gsub(" ", "-")
 
     @team.community_rating = 0
+
+    # Set default picture url
+    if !@team.picture_url
+      @team.picture_url = 'https://d13yacurqjgara.cloudfront.net/users/205424/screenshots/1953810/pandamoniumshot.png'
+    end
 
     @user = User.find(session[:session_key])
 
@@ -131,6 +136,10 @@ class TeamsController < ApplicationController
     else
       return false
     end
+  end
+
+  def has_requested_to_join?
+    @team.user_teams.where(user_id: current_user.id).any?
   end
 
   def team_members
