@@ -50,7 +50,11 @@
 
    <% if !is_user_on_team? %>
      <div class="ui section divider"></div>
-     <button class="fluid ui green massive button" id="requestToJoin">Request to Join</button>
+      <% if has_requested_to_join? %>
+        <button class="fluid ui disabled massive button" id="requestToJoin">Your request is pending...</button>
+      <% else %>
+        <button class="fluid ui green massive button" id="requestToJoin">Request to Join</button>
+      <% end %>
    <% elsif pending_join_requests? %>
      <div class="ui section divider"></div>
      <h2 class="header">Pending Requests</h2>

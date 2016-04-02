@@ -1,7 +1,7 @@
 class TeamsController < ApplicationController
   before_action :set_team, :set_user_team, only: [:show, :edit, :update, :destroy, :requestDecision]
   helper_method :game_name, :get_role, :is_user_on_team?, :get_pending_requests,
-                :team_members, :pending_join_requests?
+                :team_members, :pending_join_requests?, :has_requested_to_join?
 
   # GET /teams
   # GET /teams.json
@@ -131,6 +131,10 @@ class TeamsController < ApplicationController
     else
       return false
     end
+  end
+
+  def has_requested_to_join?
+    @team.user_teams.where(user_id: current_user.id).any?
   end
 
   def team_members
