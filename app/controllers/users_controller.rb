@@ -38,6 +38,11 @@ class UsersController < ApplicationController
     @user.permission_level = 1
     @user.slug = @user.username.downcase.gsub(" ", "-")
 
+    # Set picture_url if none given
+    if !@user.picture_url
+      @user.picture_url = default_profile_pictures.sample
+    end
+
     respond_to do |format|
       if @user.save
         login @user
@@ -117,6 +122,16 @@ class UsersController < ApplicationController
     12
   end
 
+  def default_profile_pictures
+    [
+      'https://s3-us-west-2.amazonaws.com/team-up/profile-pictures/trooper_blue.jpg',
+      'https://s3-us-west-2.amazonaws.com/team-up/profile-pictures/trooper_green.jpg',
+      'https://s3-us-west-2.amazonaws.com/team-up/profile-pictures/trooper_red.jpg',
+      'https://s3-us-west-2.amazonaws.com/team-up/profile-pictures/trooper_white.jpg',
+      'https://s3-us-west-2.amazonaws.com/team-up/profile-pictures/trooper_yellow.jpg'
+    ]
+  end
+
   def endorsed?(proficiency_id)
     if endorsers = get_endorsements(proficiency_id)
       return endorsers.include? current_user.username
@@ -144,10 +159,6 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find_by_slug(params[:id].downcase)
-      if @user.picture_url.blank?
-        # add default image
-        @user.picture_url = 'https://s-media-cache-ak0.pinimg.com/736x/dd/11/1f/dd111ff5042dc332fef3e297df41ea75.jpg'
-      end
     end
 
     def set_games_user

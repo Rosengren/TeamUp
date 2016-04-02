@@ -21,7 +21,9 @@
           <%= image_tag get_profile_picture(proficiency_post.username), alt: "Profile Picture" %>
           <div class="content">
             <%= proficiency_post.title %>
-            <div class="sub header"><%= proficiency_post.username %> - <%= proficiency_post.date.to_formatted_s(:long) %></div>
+            <div class="sub header">
+              <%= link_to proficiency_post.username, '/users/' + proficiency_post.username.downcase  %>
+              - <%= proficiency_post.date.to_formatted_s(:long) %></div>
           </div>
         </h2>
         <div class="ui content">
