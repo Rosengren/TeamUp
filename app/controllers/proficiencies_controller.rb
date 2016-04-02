@@ -1,5 +1,6 @@
 class ProficienciesController < ApplicationController
-  before_action :set_proficiency, only: [:show, :edit, :update, :destroy]
+  before_action :set_proficiency, :set_game, only: [:show, :edit, :update, :destroy]
+  helper_method :get_profile_picture
 
   # GET /proficiencies
   # GET /proficiencies.json
@@ -10,14 +11,8 @@ class ProficienciesController < ApplicationController
   # GET /proficiencies/1
   # GET /proficiencies/1.json
   def show
-    @proficiency = Proficiency.find_by_slug(params[:id])
-
-    if @proficiency.nil?
-      raise ActionController::RoutingError.new('Not Found')
-    end
-
     @proficiency_posts = ProficiencyPost.where(proficiency_id: @proficiency.id)
-    @game = !@proficiency.game.nil? ? @proficiency.game.name : "Proficiency ";
+    @proficiency_post ||= ProficiencyPost.new
   end
 
   # GET /proficiencies/new
@@ -70,10 +65,23 @@ class ProficienciesController < ApplicationController
     end
   end
 
+  def get_profile_picture(username)
+    if user = User.find_by_slug(username)
+      return user.picture_url
+    end
+    ""
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_proficiency
-      @proficiency = Proficiency.find_by_slug(params[:id])
+      if !(@proficiency = Proficiency.find_by_slug(params[:id]))
+        raise ActionController::RoutingError.new('Not Found')
+      end
+    end
+
+    def set_game
+      @game = Game.find_by_slug(params[:game_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

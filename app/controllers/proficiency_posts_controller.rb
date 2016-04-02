@@ -25,17 +25,11 @@ class ProficiencyPostsController < ApplicationController
   # POST /proficiency_posts.json
   def create
     @proficiency_post = ProficiencyPost.new(proficiency_post_params)
-    @proficiency_post.proficiency_id = params[:proficiency_id]
+    @proficiency_post.date = DateTime.now
 
-    respond_to do |format|
-      if @proficiency_post.save
-        format.html { redirect_to @proficiency_post, notice: 'Proficiency post was successfully created.' }
-        format.json { render :show, status: :created, location: @proficiency_post }
-      else
-        format.html { render :new }
-        format.json { render json: @proficiency_post.errors, status: :unprocessable_entity }
-      end
-    end
+    @proficiency_post.save
+    # TODO: May want to return a success message
+    redirect_to(:back)
   end
 
   # PATCH/PUT /proficiency_posts/1
@@ -70,6 +64,6 @@ class ProficiencyPostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def proficiency_post_params
-      params.require(:proficiency_post).permit(:title, :username, :date, :content)
+      params.require(:proficiency_post).permit(:title, :username, :content, :proficiency_id)
     end
 end
