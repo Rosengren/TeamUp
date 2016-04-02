@@ -29,7 +29,7 @@
 
     <div class="ui section divider"></div>
 
-    <table class="ui fixed striped table attached">
+    <table class="ui celled striped table attached">
       <thead>
         <tr>
           <th>Picture</th>
@@ -40,8 +40,8 @@
       <tbody>
         <% team_members.each do |user| %>
             <tr>
-              <td><%= image_tag user.picture_url, class: "ui centered bordered tiny image", alt: user.username %></td>
-              <td><%= user.username %></td>
+              <td class="collapsing"><%= image_tag user.picture_url, class: "ui centered bordered tiny image", alt: user.username %></td>
+              <td><%= link_to user.username, '/users/' + user.username.downcase.tr(' ', '-')  %></td>
               <td><%= get_role(user.id) %></td>
             </tr>
         <% end %>
@@ -70,7 +70,7 @@
       <tbody>
         <% get_pending_requests.each do |request| %>
             <tr>
-              <td><%= request.user.username %></td>
+              <td><%= link_to request.user.username, '/users/' + request.user.username.downcase.tr(' ', '-')  %></td>
               <td><%= request.role %></td>
               <td><%= request.requestMessage %></td>
               <td>

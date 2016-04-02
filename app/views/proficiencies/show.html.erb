@@ -1,8 +1,8 @@
 <div class="proficiency-page">
   <div class="ui container proficiency-header">
-    <h1 class="ui centered huge header"><%= @game.name %></h1>
-    <%= image_tag @proficiency.picture_url, class: "ui centered bordered large circular image", alt: "Proficiency Picture" %>
     <h1 class="ui centered huge header"><%= @proficiency.name %></h1>
+    <%= image_tag @proficiency.picture_url, class: "ui centered bordered large circular image", alt: "Proficiency Picture" %>
+    <h1 class="ui centered huge header"><%= @game.name %></h1>
 
     <h3 class="ui header">Description</h3>
     <p><%= @proficiency.description %></p>
