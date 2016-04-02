@@ -1,89 +1,120 @@
-<div class="ui container padding-top">
-  <% if flash[:notice] %>
-    <div id="notice">
-      <%= notice %>
-    </div>
-  <% end %>
-  <h1><b>Admin Panel</b> - <%= @current_user.username %></h1> 
-
-  <% if @permission >= 5 %>
-    <div class="ui section divider"></div>
-    <h3>Edit User Permissions</h3>
-    <%= collection_select( @user, :id, User.all, :id, :username) %>
-    
-  <% end %>
-
-  <% if @permission >= 4 %>
-    <div class="ui section divider"></div>
-    <h3>Add Game</h3>
-    <%= form_for @game, :url => url_for(:controller => 'pages', :action => 'create') do |f| %>
-      <% if @game.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>
-
-          <ul>
-          <% @game.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-          </ul>
-        </div>
-      <% end %>
-
-      <div class="field">
-        <%= f.label :name %><br>
-        <%= f.text_field :name %>
-      </div>
-      <div class="field">
-        <%= f.label :description %><br>
-        <%= f.text_area :description %>
-      </div>
-      <div class="field">
-        <%= f.label :picture_url %><br>
-        <%= f.text_area :picture_url %>
-      </div>
-      <div class="actions">
-        <%= f.submit 'Create Game', name: 'create_game' %>
+<div class="admin-page">
+  <h1 class="ui center aligned header padding-top">Admin Panel for <%= @current_user.username %></h1>
+  <div class="ui container">
+    <% if flash[:notice] %>
+      <div id="notice">
+        <%= notice %>
       </div>
     <% end %>
-  <% end %>
 
-  <% if @permission >= 3 %>
-    <div class="ui section divider"></div>
-    <h3>Add Proficiency</h3>
-    <%= form_for @proficiency, :url => url_for(:controller => 'pages', :action => 'create') do |f| %>
-      <% if @proficiency.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@proficiency.errors.count, "error") %> prohibited this proficiency from being saved:</h2>
+    <% if @permission >= 5 %>
+      <div class="ui section divider"></div>
+      <div class="ui text container">
+        <div class="ui form">
+          <div class="ui segment">
+            <h3 class="ui centered aligned header padding-top">Edit User Permissions</h3>
+            <div class="field">
+              <label for="[id]">User</label>
+              <%= collection_select( @user, :id, User.all, :id, :username, {}, {:class => 'ui fluid selection dropdown'}) %>
+            </div>
 
-          <ul>
-          <% @proficiency.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-          </ul>
+            <div class="actions right-align">
+              <button type="submit" name="edit_user" class="ui disabled submit button">Edit User</button>
+            </div>
+          </div>
         </div>
-      <% end %>
+      </div>
 
-      <div class="field">
-        <%= f.label :game %><br>
-        <%= f.collection_select( :game_id, Game.all, :id, :name) %>
-      </div>
-      <div class="field">
-        <%= f.label :name %><br>
-        <%= f.text_field :name %>
-      </div>
-      <div class="field">
-        <%= f.label :description %><br>
-        <%= f.text_area :description %>
-      </div>
-      <div class="field">
-        <%= f.label :picture_url %><br>
-        <%= f.text_area :picture_url %>
-      </div>
-      <div class="actions">
-        <%= f.submit 'Create Proficiency', name: 'create_proficiency' %>
+    <% end %>
+
+    <% if @permission >= 4 %>
+      <div class="ui section divider"></div>
+      <div class="ui text container">
+        <%= form_for @game, :url => url_for(:controller => 'pages', :action => 'create'), :html => {:class => 'ui form'} do |f| %>
+          <div class="ui segment">
+
+            <h3 class="ui centered aligned header padding-top">Add Game</h3>
+
+            <% if @game.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>
+
+                <ul>
+                <% @game.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+                </ul>
+
+              </div>
+            <% end %>
+
+            <div class="field">
+              <%= f.label :name %>
+              <%= f.text_field :name %>
+            </div>
+
+            <div class="field">
+              <%= f.label :description %>
+              <%= f.text_area :description %>
+            </div>
+
+            <div class="field">
+              <%= f.label :picture_url %>
+              <%= f.text_area :picture_url %>
+            </div>
+
+            <div class="actions right-align">
+              <%= f.submit 'Create Game', class: 'ui blue submit button', name: 'create_game' %>
+            </div>
+          </div>
+        <% end %>
       </div>
     <% end %>
-  <% end %>
 
-  <br/>
+    <% if @permission >= 3 %>
+      <div class="ui section divider"></div>
+      <div class="ui text container">
+
+        <%= form_for @proficiency, :url => url_for(:controller => 'pages', :action => 'create'), :html => {:class => 'ui form'} do |f| %>
+          <div class="ui segment">
+
+            <h3 class="ui centered aligned header padding-top">Add Proficiency</h3>
+
+            <% if @proficiency.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@proficiency.errors.count, "error") %> prohibited this proficiency from being saved:</h2>
+
+                <ul>
+                <% @proficiency.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+                </ul>
+
+              </div>
+            <% end %>
+
+            <div class="field">
+              <%= f.label :game %>
+              <%= f.collection_select( :game_id, Game.all, :id, :name, {}, {:class => 'ui fluid selection dropdown'}) %>
+            </div>
+            <div class="field">
+              <%= f.label :name %>
+              <%= f.text_field :name %>
+            </div>
+            <div class="field">
+              <%= f.label :description %>
+              <%= f.text_area :description %>
+            </div>
+            <div class="field">
+              <%= f.label :picture_url %>
+              <%= f.text_area :picture_url %>
+            </div>
+            <div class="actions right-align">
+              <%= f.submit 'Create Proficiency', class: 'ui blue submit button', name: 'create_proficiency' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
