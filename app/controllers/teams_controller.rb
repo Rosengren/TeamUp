@@ -57,6 +57,11 @@ class TeamsController < ApplicationController
 
     @team.community_rating = 0
 
+    # Set default picture url
+    if !@team.picture_url
+      @team.picture_url = 'https://d13yacurqjgara.cloudfront.net/users/205424/screenshots/1953810/pandamoniumshot.png'
+    end
+
     @user = User.find(session[:session_key])
 
     respond_to do |format|

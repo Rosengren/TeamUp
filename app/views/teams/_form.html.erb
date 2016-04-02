@@ -40,8 +40,14 @@
     </div>
     <div class="field">
       <%= f.label :location %>
-      <%= f.text_field :location %>
+      <div class="ui fluid selection dropdown">
+        <%= f.hidden_field :location %>
+        <i class="dropdown icon"></i>
+        <div class="default text">Select Country</div>
+        <%= render 'list_of_countries' %>
+      </div>
     </div>
+
     <div class="field">
       <%= f.label :picture_url %>
       <%= f.text_field :picture_url %>
