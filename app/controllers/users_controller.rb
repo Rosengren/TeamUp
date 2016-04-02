@@ -65,7 +65,7 @@ class UsersController < ApplicationController
   end
 
   # DELETE /users/1
-  # DELETE /users/1.juserson
+  # DELETE /users/1.json
   def destroy
     @user.destroy
     respond_to do |format|
@@ -96,7 +96,7 @@ class UsersController < ApplicationController
     endorserObjects = []
     get_endorsements(proficiency_id).each do |endorser|
       endorserObjects.push(User.find_by(username: endorser))
-    end 
+    end
     endorserObjects
   end
 
