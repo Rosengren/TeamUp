@@ -11,18 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160331180558) do
+ActiveRecord::Schema.define(version: 20160303195500) do
 
   create_table "games", force: :cascade do |t|
     t.string   "name"
+    t.string   "slug"
     t.text     "description"
     t.text     "picture_url"
-    t.string   "slug"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  create_table "games_users", force: :cascade do |t|
+  create_table "games_users", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "game_id"
   end
@@ -48,7 +48,6 @@ ActiveRecord::Schema.define(version: 20160331180558) do
     t.datetime "date"
     t.text     "content"
     t.integer  "proficiency_id"
-    t.string   "slug"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
@@ -82,12 +81,12 @@ ActiveRecord::Schema.define(version: 20160331180558) do
 
   create_table "user_teams", force: :cascade do |t|
     t.string   "role"
+    t.integer  "status"
+    t.string   "requestMessage"
     t.integer  "user_id"
     t.integer  "team_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.integer  "status"
-    t.string   "requestMessage"
   end
 
   add_index "user_teams", ["team_id"], name: "index_user_teams_on_team_id"
@@ -103,7 +102,5 @@ ActiveRecord::Schema.define(version: 20160331180558) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
-
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
 
 end
