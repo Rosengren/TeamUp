@@ -6,7 +6,8 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
+    @teams = Team.order("community_rating DESC").all
+    @games = Game.all
   end
 
   # GET /teams/1

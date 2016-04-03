@@ -20,16 +20,25 @@
             <div class="results"></div>
             <a class="ui icon item" title="Advanced search">
               <i class="sitemap grey icon" title="Advanced search"></i>
-            </a>
+            </a>            
+          </div>
+
+          <div class="ui text menu">
+            <div class="item">
+              <%= link_to "Users", users_path %>
+            </div>
+            <div class="item">
+              <%= link_to "Teams", teams_path %>
+            </div>
           </div>
 
           <div class="ui dropdown item">
-            Profile
+            <%= current_user.username %>
             <i class="dropdown icon"></i>
             <div class="menu">
-              <%= link_to current_user.username, current_user, class: 'item' %>
+              <%= link_to "Profile", current_user, class: 'item' %>
               <%= link_to "New Team", new_team_path, class: 'item' %>
-              <%= link_to 'Settings', edit_user_path(current_user), class: 'item' %>
+              <%= link_to "Settings", edit_user_path(current_user), class: 'item' %>
               <% if is_admin? %>
                 <%= link_to 'Admin Panel', admin_path, class: 'item' %>
               <% end %>

@@ -25,8 +25,6 @@
 
     <%= render 'game_proficiency', :user => @user %>
 
-    <p id="notice"><%= notice %></p>
-
     <div class="ui section divider"></div>
 
     <% if is_current_user? %>
@@ -95,3 +93,5 @@
       </div>
   </div>
 <% end %>
+
+<p id="notice"><%= notice %></p>
