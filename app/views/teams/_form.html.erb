@@ -31,10 +31,6 @@
       <%= f.text_field :name %>
     </div>
     <div class="field">
-      <%= label_tag(:role, "Role") %>
-      <%= text_field_tag(:role) %>
-    </div>
-    <div class="field">
       <%= f.label :description %>
       <%= f.text_area :description %>
     </div>
@@ -51,6 +47,13 @@
     <div class="field">
       <%= f.label :picture_url %>
       <%= f.text_field :picture_url %>
+    </div>
+
+    <div class="ui section divider"></div>
+
+    <div class="field">
+      <%= label_tag(:role, "Player role") %>
+      <%= text_field_tag(:role) %>
     </div>
     <div class="actions right-align">
       <%= f.submit(:class => 'ui blue submit button', :value => 'Create Team') %>
