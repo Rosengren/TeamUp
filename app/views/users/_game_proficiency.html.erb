@@ -23,9 +23,10 @@
   </div>
 
   <h3 class="ui header">Proficiencies</h3>
-  <table class="ui fixed striped table attached">
+  <table class="ui celled striped table attached">
     <thead>
       <tr>
+        <th> </th>
         <th>Name</th>
         <th>Description</th>
         <th>Endorsements</th>
@@ -34,6 +35,7 @@
     <tbody>
       <% proficiencies_for_game(game).each do |proficiency| %>
       <tr>
+        <td class="collapsing"><%= image_tag proficiency.picture_url, class: 'ui tiny left floated image' %></td>
         <td><%= link_to proficiency.name, '/games/' + game.name.downcase.tr(' ', '-') + '/proficiencies/' + proficiency.name.downcase %></td>
         <td><%= proficiency.description %></td>
         <td>
