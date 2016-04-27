@@ -1,0 +1,6 @@
+<tr>
+  <td class="collapsing"><%= image_tag @proficiency.picture_url, class: 'ui tiny left floated image' %></td>
+  <td><%= link_to @proficiency.name, '/games/' + @proficiency.game.name.downcase.tr(' ', '-') + '/proficiencies/' + @proficiency.name.downcase %></td>
+  <td><%= @proficiency.description %></td>
+  <td><%= button_to 'Endorse', endorse_path(current_user.username, @proficiency.id), method: :post, class: 'ui positive button' %></td>
+</tr>

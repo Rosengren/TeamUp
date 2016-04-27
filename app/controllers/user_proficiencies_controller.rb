@@ -25,9 +25,14 @@ class UserProficienciesController < ApplicationController
   # POST /user_proficiencies.json
   def create
     @user_proficiency = UserProficiency.new(user_proficiency_params)
-    @user_proficiency.save
-    # TODO: May want to return a success message
-    redirect_to(:back)
+    @proficiency = Proficiency.find(@user_proficiency.proficiency_id)
+    respond_to do |format|
+      if @user_proficiency.save
+        format.js {}
+      else
+        format.json { render json: @user_proficiency.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /user_proficiencies/1

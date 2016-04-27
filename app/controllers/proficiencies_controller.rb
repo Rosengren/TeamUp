@@ -1,6 +1,6 @@
 class ProficienciesController < ApplicationController
   before_action :set_proficiency, :set_game, only: [:show, :edit, :update, :destroy]
-  helper_method :get_profile_picture
+  helper_method :get_profile_picture, :endorsements_for_proficiency
 
   # GET /proficiencies
   # GET /proficiencies.json
