@@ -3,13 +3,13 @@ $(document).on 'ready page:load', ->
   $('.small.add.game.modal')
     .modal({
       onApprove : ->
-        return false
+        return true
     })
 
   $('.small.add.proficiency.modal')
     .modal({
       onApprove : ->
-        return false
+        return true
     })
 
   $('#add_game_to_user').on 'click', ->

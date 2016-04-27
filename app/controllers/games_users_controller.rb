@@ -5,9 +5,14 @@ class GamesUsersController < ApplicationController
   # POST /games_user.json
   def create
     @games_user = GamesUser.new(games_user_params)
-    @games_user.save
-    # TODO: May want to return a success message
-    redirect_to(:back)
+    @game = Game.find(@games_user.game_id)
+    respond_to do |format|
+      if @games_user.save
+        format.js {}
+      else
+        format.json { render json: @user_proficiency.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # DELETE /games_user/1
