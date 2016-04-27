@@ -1,3 +1,19 @@
+$(document).on 'click', '.add_proficiency_to_user', ->
+  $that = $(this)
+  $('.ui.search.selection.dropdown')
+    .dropdown({
+      apiSettings: {
+        action: 'search proficiencies',
+        urlData: {
+          id: $that.attr('data')
+        }
+      }
+    })
+
+  $('.small.add.proficiency.modal')
+    .modal('show');
+
+
 $(document).on 'ready page:load', ->
 
   $('.small.add.game.modal')
@@ -15,21 +31,6 @@ $(document).on 'ready page:load', ->
   $('#add_game_to_user').on 'click', ->
     $('.small.add.game.modal')
       .modal('show')
-
-  $('.add_proficiency_to_user').on 'click', ->
-    $that = $(this)
-    $('.ui.search.selection.dropdown')
-      .dropdown({
-        apiSettings: {
-          action: 'search proficiencies',
-          urlData: {
-            id: $that.attr('data')
-          }
-        }
-      })
-
-    $('.small.add.proficiency.modal')
-      .modal('show');
 
   $('.dropdown')
     .dropdown()
