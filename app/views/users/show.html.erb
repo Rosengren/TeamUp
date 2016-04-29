@@ -23,7 +23,9 @@
       </div>
     </div>
 
-    <%= render 'game_proficiency', :user => @user %>
+    <div id="user_games">
+      <%= render @user.games %>
+    </div>
 
     <div class="ui section divider"></div>
 
@@ -43,7 +45,7 @@
       </div>
       <div class="content">
 
-        <%= form_for(@games_user, :html => {:class => 'ui add game form', id: 'addGameForm'}) do |f| %>
+        <%= form_for(@games_user, remote: true, html: {class: 'ui add game form', id: 'addGameForm'}) do |f| %>
 
           <div class="field">
             <label>Select Game</label>
@@ -68,7 +70,7 @@
         Add Proficiency
       </div>
       <div class="content">
-        <%= form_for(@user_proficiency, :html => {:class => 'ui add proficiency form', id: 'addProficiencyForm'}) do |f| %>
+        <%= form_for(@user_proficiency, remote: true, html: {class: 'ui add proficiency form', id: 'addProficiencyForm'}) do |f| %>
           <div class="field">
             <label>Select Proficiency</label>
             <div class="ui search selection dropdown">

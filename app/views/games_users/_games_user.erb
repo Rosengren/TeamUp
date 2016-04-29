@@ -1,0 +1,36 @@
+<div class="ui section divider"></div>
+<div class="ui container">
+  <h2 class="ui header">
+    <%= link_to @game.name, '/games/' + @game.name.downcase.tr(' ', '-')  %>
+  </h2>
+  <div class="ui container">
+    <div class="ui two column grid">
+      <div class="three wide column middle aligned centered">
+        <%= image_tag @game.picture_url, class: 'ui small left floated image' %>
+      </div>
+      <div class="thirteen wide column">
+        <strong>Teams:</strong>
+        <div class="ui list"> </div>
+        <strong>Game Description:</strong>
+        <p><%= @game.description %></p>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="ui header">Proficiencies</h3>
+  <table class="ui celled striped table attached">
+    <thead>
+      <tr>
+        <th> </th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Endorsements</th>
+      </tr>
+    </thead>
+
+    <tbody id="game_<%= @game.id %>">
+
+    </tbody>
+  </table>
+  <div class="ui bottom attached blue button add_proficiency_to_user" data="<%= @game.id %>">Add Proficiency</div>
+</div>
