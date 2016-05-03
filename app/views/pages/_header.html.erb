@@ -3,13 +3,7 @@
     <div class="ui secondary menu">
       <div class="item">
         <div class="ui tiny image">
-        <% if logged_in? %>
-          <%= link_to image_tag('logo.svg', alt: 'TeamUp'), current_user %>
-        <% else %>
-          <a href="/login">
-            <%= image_tag "logo.svg", alt: 'TeamUp' %>
-          </a>
-        <% end %>
+          <%= link_to image_tag('logo.svg', alt: 'TeamUp'), root_url %>
         </div>
       </div>
       <div class="right menu">

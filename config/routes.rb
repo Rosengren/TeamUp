@@ -2,19 +2,16 @@ Rails.application.routes.draw do
   resources :games_users, only: [:create, :destroy]
   resources :user_proficiencies, only: [:create, :destroy]
   resources :teams
-  resources :users
+  resources :users, except: :new
   resources :user_teams
-  resources :proficiency_posts, only: [:create]
+  resources :proficiency_posts, only: :create
   resources :games, only: [:create, :show, :destroy] do
     resources :proficiencies, except: :index do
       resources :proficiency_posts, only: [:create, :destroy]
     end
   end
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # Root of site, depending on whether you are logged in or not
+  # Root of site
   root 'sessions#new'
 
   get    'profile' => 'users#show'
