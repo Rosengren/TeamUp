@@ -11,20 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160503181418) do
+ActiveRecord::Schema.define(version: 20160505192522) do
 
   create_table "games", force: :cascade do |t|
     t.string   "name"
-    t.string   "slug"
     t.text     "description"
     t.text     "picture_url"
+    t.string   "slug"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  create_table "games_users", id: false, force: :cascade do |t|
+  create_table "games_users", force: :cascade do |t|
     t.integer "user_id"
     t.integer "game_id"
+    t.integer "status",  default: 1
   end
 
   add_index "games_users", ["game_id"], name: "index_games_users_on_game_id"
@@ -62,8 +63,9 @@ ActiveRecord::Schema.define(version: 20160503181418) do
     t.text     "picture_url"
     t.string   "slug"
     t.integer  "game_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "status",           default: 1
   end
 
   add_index "teams", ["game_id"], name: "index_teams_on_game_id"
@@ -72,8 +74,9 @@ ActiveRecord::Schema.define(version: 20160503181418) do
     t.text     "endorsements"
     t.integer  "user_id"
     t.integer  "proficiency_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "status",         default: 1
   end
 
   add_index "user_proficiencies", ["proficiency_id"], name: "index_user_proficiencies_on_proficiency_id"
@@ -81,12 +84,12 @@ ActiveRecord::Schema.define(version: 20160503181418) do
 
   create_table "user_teams", force: :cascade do |t|
     t.string   "role"
-    t.integer  "status"
-    t.string   "requestMessage"
     t.integer  "user_id"
     t.integer  "team_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "status"
+    t.string   "requestMessage"
   end
 
   add_index "user_teams", ["team_id"], name: "index_user_teams_on_team_id"
@@ -108,6 +111,9 @@ ActiveRecord::Schema.define(version: 20160503181418) do
     t.string   "confirmation_token"
     t.datetime "confirmation_expiry"
     t.string   "last_ip_address"
+    t.integer  "status",              default: 1
   end
+
+  add_index "users", ["username"], name: "index_users_on_username", unique: true
 
 end
