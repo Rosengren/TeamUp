@@ -15,14 +15,14 @@ ActiveRecord::Schema.define(version: 20160505192522) do
 
   create_table "games", force: :cascade do |t|
     t.string   "name"
+    t.string   "slug"
     t.text     "description"
     t.text     "picture_url"
-    t.string   "slug"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  create_table "games_users", force: :cascade do |t|
+  create_table "games_users", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "game_id"
     t.integer "status",  default: 1
@@ -84,12 +84,12 @@ ActiveRecord::Schema.define(version: 20160505192522) do
 
   create_table "user_teams", force: :cascade do |t|
     t.string   "role"
+    t.integer  "status"
+    t.string   "requestMessage"
     t.integer  "user_id"
     t.integer  "team_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.integer  "status"
-    t.string   "requestMessage"
   end
 
   add_index "user_teams", ["team_id"], name: "index_user_teams_on_team_id"
@@ -113,7 +113,5 @@ ActiveRecord::Schema.define(version: 20160505192522) do
     t.string   "last_ip_address"
     t.integer  "status",              default: 1
   end
-
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
 
 end
