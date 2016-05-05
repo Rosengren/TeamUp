@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   end
 
   def set_ip(address)
-    update_attribute(:last_ip_address, "abc")
+    update_attribute(:last_ip_address, address)
   end
 
   def User.new_remember_token
