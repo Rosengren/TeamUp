@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  def new
+	def new
   end
 
   def create
@@ -9,6 +9,8 @@ class SessionsController < ApplicationController
       #LogIn
       flash.now[:notice] = 'Logged in Successfully!'
       login user
+			params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+			logger.info 'User info passed: #{user}'
       redirect_to user #goes to user's profile
     else
       flash.now[:danger] = 'Incorrect username/password combination.'
@@ -17,7 +19,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    logout
+    logout if logged_in?
     redirect_to root_url
   end
 end

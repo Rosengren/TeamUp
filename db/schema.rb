@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303195500) do
+ActiveRecord::Schema.define(version: 20160503181418) do
 
   create_table "games", force: :cascade do |t|
     t.string   "name"
@@ -96,11 +96,18 @@ ActiveRecord::Schema.define(version: 20160303195500) do
     t.string   "username"
     t.text     "description"
     t.text     "picture_url"
-    t.integer  "permission_level"
+    t.integer  "permission_level",    default: 1
     t.string   "password_digest"
     t.string   "slug"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "remember_digest"
+    t.string   "email"
+    t.string   "reset_token"
+    t.datetime "reset_token_expiry"
+    t.string   "confirmation_token"
+    t.datetime "confirmation_expiry"
+    t.string   "last_ip_address"
   end
 
 end
