@@ -48,6 +48,19 @@ $(document).on 'ready page:load', ->
             }
           ]
         },
+        user_email : {
+          identifier: "user_email",
+          rules: [
+            {
+              type    : 'empty',
+              prompt  : 'Please enter an email address'
+            }
+            {
+              type    : 'email',
+              prompt  : 'Email must be valid (ex: john_white@teamup.com)'
+            }
+          ]
+        },
         user_password : {
           identifier : "user_password",
           rules: [

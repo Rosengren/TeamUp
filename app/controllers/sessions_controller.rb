@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       #LogIn
       flash.now[:notice] = 'Logged in Successfully!'
       login user
-			remember user
+			params[:session][:remember_me] == '1' ? remember(user) : forget(user)
 			logger.info 'User info passed: #{user}'
       redirect_to user #goes to user's profile
     else

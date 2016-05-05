@@ -31,13 +31,13 @@ class ApplicationController < ActionController::Base
 		
 		# if logged in, send the user to their home page if trying to access the login or signup pages
 		if outside_path?(request.path) || (controller == "users" && action == "create") 
-			redirect_to @current_user if !@current_user.nil?
-    elsif request.path != "/login" && request.path != "/signup" && !(controller == "users" && action == "create")
-      redirect_to :login if @current_user.nil?
+			redirect_to @current_user if !current_user.nil?
+    elsif !outside_path?(request.path) && !(controller == "users" && action == "create")
+      redirect_to :login if current_user.nil?
     end
   end
 
- # Check if trying to access the admin page as a non-admin
+  # Check if trying to access the admin page as a non-admin
   def check_if_admin_access
     if request.path == "/admin" && current_user.permission_level <= 2
       redirect_to :back

@@ -35,7 +35,6 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    @user.permission_level = 1
     @user.slug = @user.username.downcase.gsub(" ", "-")
 
     # Set picture_url if none given
@@ -180,6 +179,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation, :description, :picture_url)
+      params.require(:user).permit(:username, :email, :password, :password_confirmation, :description, :picture_url)
     end
 end

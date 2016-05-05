@@ -18,6 +18,13 @@
       <%= f.password_field :password, class: 'form-control' %>
     </div>
 
+    <div class="ui checkbox">
+      <%= f.label :remember_me, class: "checkbox inline" do %>
+        <%= f.check_box :remember_me %>
+        <span>Remember me on this computer</span>
+      <% end %>
+    </div>
+
     <div class="actions right-align">
       <%= f.submit :class => 'ui blue submit button', :value => 'Login' %>
     </div>

@@ -1,6 +1,8 @@
 module SessionsHelper
   def login(user)
     session[:session_key] = user.id
+    user.set_ip(request.remote_ip)
+    @current_user = user
   end
 
   def current_user
@@ -9,7 +11,7 @@ module SessionsHelper
     elsif (session_key = cookies.signed[:session_key])
       user = User.find_by(id: session_key)
       if user && user.authenticated?(cookies[:session_remember])
-        log_in user
+        login user
       end
     end
   end
@@ -32,11 +34,6 @@ module SessionsHelper
 
   def logged_in?
     !current_user.nil?
-  end
-
-	def log_in(user)
-    session[:session_key] = user.id
-    @current_user = user
   end
 
   def logout

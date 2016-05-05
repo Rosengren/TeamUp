@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
     slug
   end
 
+  def set_ip(address)
+    update_attribute(:last_ip_address, "abc")
+  end
+
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end
