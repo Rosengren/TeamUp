@@ -1,8 +1,16 @@
 <div class="ui section divider"></div>
+
 <div class="ui container">
-  <h2 class="ui header">
-    <%= link_to game.name, '/games/' + game.name.downcase.tr(' ', '-')  %>
-  </h2>
+  <div class="ui grid">
+        <div class="left floated twelve wide column">
+          <h2 class="ui header">
+            <%= link_to game.name, '/games/' + game.name.downcase.tr(' ', '-')  %>
+          </h2>
+        </div>
+        <div class="right floated">
+            <button type="button"class="ui basic button">Edit</button>
+        </div>
+      </div>
   <div class="ui container">
     <div class="ui two column grid">
       <div class="three wide column middle aligned centered">
@@ -22,7 +30,7 @@
   </div>
 
   <h3 class="ui header">Proficiencies</h3>
-  <table class="ui celled striped table attached">
+  <table class="ui celled table attached">
     <thead>
       <tr>
         <th> </th>
