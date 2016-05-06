@@ -93,7 +93,7 @@ class UsersController < ApplicationController
   end
 
   def proficiencies_for_game(game)
-    @user.proficiencies.where game_id: game.id
+    @user.proficiencies.where(game_id: game.id).where(active = 1)
   end
 
   def endorsements_for_proficiency(proficiency_id)

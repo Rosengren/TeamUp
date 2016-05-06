@@ -24,7 +24,7 @@
     </div>
 
     <div id="user_games">
-      <%= render @user.games %>
+      <%= render @user.games.where(active = 1) %>
     </div>
 
     <div class="ui section divider"></div>
