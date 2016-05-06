@@ -10,4 +10,7 @@
       <%= button_to 'Endorse', endorse_path(@user.username, proficiency.id), method: :post, class: 'ui positive button' %>
     <% end %>
   </td>
+  <td class="hidden collapsing deletable game_<%= proficiency.game.id %>">
+    <button type="button" class="ui red button">Delete</button>
+  </td>
 </tr>

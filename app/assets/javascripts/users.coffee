@@ -13,6 +13,10 @@ $(document).on 'click', '.add_proficiency_to_user', ->
   $('.small.add.proficiency.modal')
     .modal('show');
 
+$(document).on 'click', '.edit_game', ->
+  $(".deletable.game_" + $(this).attr('data'))
+    .toggle()
+
 
 $(document).on 'ready page:load', ->
 

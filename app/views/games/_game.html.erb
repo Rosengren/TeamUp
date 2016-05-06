@@ -8,7 +8,11 @@
           </h2>
         </div>
         <div class="right floated">
-            <button type="button"class="ui basic button">Edit</button>
+            <button type="button"class="ui basic button edit_game" data="<%= game.id %>">Edit</button>
+            <button type="button" class="ui red button hidden deletable game_<%= game.id %>">Delete</button>
+
+            <div class="hidden deletable game_<%= game.id %>">
+            </div>
         </div>
       </div>
   <div class="ui container">
@@ -37,6 +41,7 @@
         <th>Name</th>
         <th>Description</th>
         <th>Endorsements</th>
+        <th class="hidden deletable game_<%= game.id %>"> </th>
       </tr>
     </thead>
 
