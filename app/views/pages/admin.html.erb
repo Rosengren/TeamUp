@@ -1,11 +1,7 @@
 <div class="admin-page">
   <h1 class="ui center aligned header padding-top">Admin Panel for <%= @current_user.username %></h1>
   <div class="ui container">
-    <% if flash[:notice] %>
-      <div id="notice">
-        <%= notice %>
-      </div>
-    <% end %>
+
     <p id="notice"><%= notice %></p>
 
     <% if @permission >= 5 %>

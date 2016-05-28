@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   resources :games_users, only: [:create, :destroy]
   resources :user_proficiencies, only: [:create, :destroy]
   resources :teams
-  resources :users, except: :new
+  resources :users, except: :new do
+    member do
+      get :confirm_account
+    end
+  end
   resources :user_teams
   resources :proficiency_posts, only: :create
   resources :games, only: [:create, :show, :destroy] do
@@ -15,6 +19,7 @@ Rails.application.routes.draw do
   root 'sessions#new'
 
   get    'profile' => 'users#show'
+  get    'confirm' => 'pages#confirm'
   get    'signup'  => 'users#new'
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
@@ -22,6 +27,7 @@ Rails.application.routes.draw do
 
   post 'teams/:id/requestDecision' => 'teams#requestDecision', as: :request_decision
   post 'users/:id/endorse/:proficiency_id' => 'users#endorse', as: :endorse
+  post   'users/:id/confirm_account' => 'users#send_confirmation_email', as: :confirm_account
 
   get    'admin'   => 'pages#admin'
   post   'admin'   => 'pages#create'
