@@ -1,6 +1,6 @@
 <div class="ui section divider"></div>
 
-<div class="ui container">
+<div class="ui container" id="g_<%= game.id %>">
   <div class="ui grid">
         <div class="left floated twelve wide column">
           <h2 class="ui header">
@@ -9,8 +9,7 @@
         </div>
         <div class="right floated">
             <button type="button"class="ui basic button edit_game" data="<%= game.id %>">Edit</button>
-            <button type="button" class="ui red button hidden deletable game_<%= game.id %>">Delete</button>
-
+            <%= button_to 'Delete', destroy_user_game_path(game.id), method: :post, remote: true, class: "ui hidden red button deletable game_#{game.id}"  %>
             <div class="hidden deletable game_<%= game.id %>">
             </div>
         </div>

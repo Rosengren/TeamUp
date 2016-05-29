@@ -4,6 +4,8 @@ class GamesUsersController < ApplicationController
   # POST /games_user
   # POST /games_user.json
   def create
+    # TODO: determine if game already exists
+
     @games_user = GamesUser.new(games_user_params)
     @game = Game.find(@games_user.game_id)
     respond_to do |format|
@@ -18,10 +20,13 @@ class GamesUsersController < ApplicationController
   # DELETE /games_user/1
   # DELETE /games_user/1.json
   def destroy
-    @games_user.destroy
+    @games_user.active = INACTIVE
     respond_to do |format|
-      format.html { redirect_to games_user_url, notice: 'User game was successfully destroyed.' }
-      format.json { head :no_content }
+      if @games_user.save
+        format.js {}
+      else
+        format.json { render json: @user_proficiency.errors, status: :unprocessable_entity }
+      end
     end
   end
 

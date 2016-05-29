@@ -52,12 +52,13 @@ class UserProficienciesController < ApplicationController
   # DELETE /user_proficiencies/1
   # DELETE /user_proficiencies/1.json
   def destroy
-    @user_proficiency.active = 0
-    # @user_proficiency.destroy
-    @user_proficiency.save
+    @user_proficiency.active = INACTIVE
     respond_to do |format|
-      format.html { redirect_to user_proficiencies_url, notice: 'User proficiency was successfully destroyed.' }
-      format.json { head :no_content }
+      if @user_proficiency.save
+        format.js {}
+      else
+        format.json { render json: @user_proficiency.errors, status: :unprocessable_entity }
+      end
     end
   end
 
