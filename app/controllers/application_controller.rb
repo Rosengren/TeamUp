@@ -54,11 +54,6 @@ class ApplicationController < ActionController::Base
     @permission = @current_user!=nil ? @current_user.permission_level : 0
   end
 
-  # check if the user's account is confirmed
-  def account_confirmed?
-    current_user.confirmation_token && current_user.confirmation_expiry.nil?
-  end
-
   # Check if redirecting the user is required
   def check_if_redirect
     # get the current controller and action for the path

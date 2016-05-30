@@ -42,4 +42,9 @@ module SessionsHelper
     @current_user = nil
   end
 
+  # check if the user's account is confirmed
+  def account_confirmed?
+    current_user && current_user.confirmation_token && current_user.confirmation_expiry.nil?
+  end
+
 end
