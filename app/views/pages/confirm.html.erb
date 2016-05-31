@@ -1,0 +1,10 @@
+<div class="ui container aligned-text">
+In order to take advantage of the wonderful workings of TeamUp, it's important that we know that you're as committed to this process as we are. By confirming your email, you agree to sign away all doubts and worries to us, and let our super-duper algorithms do all the worrying for you.
+  <br/>
+  <br/>
+  <div class="centered">
+    <%= button_to [:confirm_account, @current_user], class: "ui positive button", data: { disable_with: "Email Sent!" } do %>
+      TeamUp Now, <%= @current_user.username %>!
+    <% end %>
+  </div>
+</div>

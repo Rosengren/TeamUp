@@ -11,6 +11,14 @@
 
 <body id="teamUp" class="index popup">
 <%= render "pages/header" %>
+<div class="flash-header">
+  <% flash.each do |message_type, message| %>
+    <div class="<%= flash_style(message_type) %>">
+      <i class="close icon"></i>
+      <%= message %>
+    </div>
+  <% end %>
+</div>
 <%= yield %>
 
 </body>

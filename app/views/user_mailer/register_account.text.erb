@@ -1,0 +1,7 @@
+Welcome to TeamUp, <%= @user.username %>!
+
+In order to activate your account and all the other schtuff we provide, we need you to click the link below to verify your account.
+
+If you would rather not TeamUp, feel free to ignore this!
+
+<%= confirm_account_user_url(@user.confirmation_action) %>

@@ -1,3 +1,4 @@
+require 'date'
 class User < ActiveRecord::Base
   has_many :user_proficiencies
   has_many :user_teams
@@ -24,18 +25,34 @@ class User < ActiveRecord::Base
     SecureRandom.urlsafe_base64
   end
 
-	def authenticated?(remember_token)
-		return false if remember_digest.nil?
-		BCrypt::Password.new(remember_digest).is_password?(remember_token)
-	end
+  def authenticated?(remember_token)
+    return false if remember_digest.nil?
+    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  end
 
   def remember
-		self.remember_token = User.new_remember_token
+    self.remember_token = User.new_remember_token
     update_attribute(:remember_digest, BCrypt::Password.create(remember_token))
-	end
+  end
 
-	def forget
-		update_attribute(:remember_digest, nil)
-	end
+  def forget
+    update_attribute(:remember_digest, nil)
+  end
+
+  def confirmation_action
+    if !self.confirmation_token
+      safe_token = SecureRandom.urlsafe_base64
+      update_attribute(:confirmation_token, safe_token)
+      update_attribute(:confirmation_expiry, DateTime.now + 3)
+      safe_token
+    else
+      update_attribute(:confirmation_expiry, DateTime.now + 3)
+      self.confirmation_token
+    end
+  end
+
+  def activate_account
+    update_attribute(:confirmation_expiry, nil)
+  end
 
 end

@@ -20,17 +20,17 @@ module SessionsHelper
     current_user.permission_level > 2
   end
 
-	def remember(user)
-		user.remember
-		cookies.permanent.signed[:session_key] = user.id
-		cookies.permanent[:session_remember] = user.remember_token
-	end
+  def remember(user)
+    user.remember
+    cookies.permanent.signed[:session_key] = user.id
+    cookies.permanent[:session_remember] = user.remember_token
+  end
 
-	def forget(user)
-		user.forget
-		cookies.delete(:session_key)
-		cookies.delete(:session_remember)
-	end
+  def forget(user)
+    user.forget
+    cookies.delete(:session_key)
+    cookies.delete(:session_remember)
+  end
 
   def logged_in?
     !current_user.nil?
@@ -40,6 +40,11 @@ module SessionsHelper
 		forget(current_user)
     session.delete(:session_key)
     @current_user = nil
+  end
+
+  # check if the user's account is confirmed
+  def account_confirmed?
+    current_user && current_user.confirmation_token && current_user.confirmation_expiry.nil?
   end
 
 end

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, :set_games_user, :set_user_proficiency,
-      only: [:show, :edit, :update, :destroy, :endorse]
+      only: [:show, :edit, :update, :destroy, :endorse, :send_confirmation_email]
   helper_method :is_current_user?, :proficiencies_for_game, :get_list_of_games,
       :endorsements_for_proficiency, :number_of_games, :number_of_proficiencies,
       :user_rating, :get_teams_for_game, :endorsed?
@@ -148,6 +148,43 @@ class UsersController < ApplicationController
       proficiency.save
     end
     redirect_to(:back)
+  end
+
+  def send_confirmation_email
+    if @user && logged_in?
+      UserMailer.register_account(@user).deliver_now
+      flash[:notice] = "Confirmation email has been sent. Please note that it can take up to 10 minutes for the email to arrive in your inbox."
+    else
+      flash[:warning] = "Your session has expired. Please log in again to confirm your account."
+      return redirect_to root_url
+    end
+    redirect_to confirm_url
+  end
+
+  def confirm_account
+    user = User.find_by_confirmation_token(params[:id])
+    # if the user has already confirmed their account, return to root
+    if user && user.confirmation_expiry.nil?
+      flash[:warning] = "User #{user.username} is already confirmed!"
+      return redirect_to root_url
+    end
+
+    # if the token exists for a user and is not expired
+    if user && !user.confirmation_expiry.to_date.past?
+      user.activate_account
+      flash[:success] = "Account confirmed!"
+    # if token has expired
+    elsif current_user
+      flash[:danger] = "Your confirmation email has expired! Please login and confirm again."
+    else
+      flash[:danger] = "No such account exists!"
+    end
+
+    # logout current user and/or redirect to login if
+    if !user || (logged_in? && current_user.id != user.id)
+      logout
+    end
+    redirect_to root_url
   end
 
   def get_teams_for_game(id)
