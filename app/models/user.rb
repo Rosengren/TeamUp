@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: {minimum: 7}
   validates :email, presence: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: true
   has_secure_password
-
   validates_presence_of :slug
+
   attr_accessor :remember_token
 
   def to_param
